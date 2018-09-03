@@ -1,0 +1,17 @@
+{
+    "name": "onedrop/neos-hubspot",
+    "description": "Hubspot Forms connector for Neos. Embedd Forms in Neos native forms and submit them via ajax",
+    "type": "neos-package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oliver Eglseder",
+            "email": "oeglseder@1drop.de"
+        }
+    ],
+    "require": {
+        "neos/neos": "^4.0",
+        "neos/form": "^4.0",
+        "ryanwinchester/hubspot-php": "^1.1"
+    }
+}
