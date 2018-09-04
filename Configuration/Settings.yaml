@@ -3,3 +3,9 @@ Onedrop:
     Hubspot:
       api:
         hapikey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Neos:
+  Neos:
+    fusion:
+      autoInclude:
+        Onedrop.Neos.Hubspot: true
+        Onedrop.NeosHubspot: true

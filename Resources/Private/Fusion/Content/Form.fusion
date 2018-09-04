@@ -1,5 +1,5 @@
 prototype(Onedrop.Neos.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {
     renderer = Onedrop.Neos.Hubspot:Component.Molecule.Form {
-        content = ${Onedrop.JobAdPartner.getAll()}
+        content = ${node.formConfiguration}
     }
 }

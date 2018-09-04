@@ -1,4 +1,5 @@
 <?php
+
 namespace Onedrop\NeosHubspot\Service;
 
 use Neos\Cache\Frontend\VariableFrontend;
@@ -46,11 +47,21 @@ class FormsService
             function (array $form) {
                 return [
                     'identifier' => $form['guid'],
-                    'label' => $form['name'],
+                    'label'      => $form['name'],
                     'formGroups' => $form['formFieldGroups'],
                 ];
             },
             $forms
         );
+    }
+
+    /**
+     * @param string $hubspotFormIdentifier
+     * @return array
+     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     */
+    public function getFormByIdentifier(string $hubspotFormIdentifier): array
+    {
+        return $this->forms->getById($hubspotFormIdentifier)->toArray();
     }
 }

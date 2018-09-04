@@ -1,4 +1,5 @@
 'Onedrop.Neos.Hubspot:Content.Form':
+  class: Onedrop\NeosHubspot\Domain\Model\FormNode
   superTypes:
     'Neos.Neos:Content': true
   ui:
