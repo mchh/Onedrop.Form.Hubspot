@@ -1,6 +1,5 @@
 <?php
-
-namespace Onedrop\NeosHubspot\Service;
+namespace Onedrop\Neos\Hubspot\Service;
 
 use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;

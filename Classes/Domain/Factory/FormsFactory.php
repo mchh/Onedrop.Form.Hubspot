@@ -1,5 +1,5 @@
 <?php
-namespace Onedrop\NeosHubspot\Domain\Factory;
+namespace Onedrop\Neos\Hubspot\Domain\Factory;
 
 use Neos\Flow\Annotations as Flow;
 use SevenShores\Hubspot\Factory;

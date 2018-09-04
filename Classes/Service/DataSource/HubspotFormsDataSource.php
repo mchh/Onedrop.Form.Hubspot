@@ -1,10 +1,10 @@
 <?php
-namespace Onedrop\NeosHubspot\Service\DataSource;
+namespace Onedrop\Neos\Hubspot\Service\DataSource;
 
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Service\DataSource\AbstractDataSource;
-use Onedrop\NeosHubspot\Service\FormsService;
+use Onedrop\Neos\Hubspot\Service\FormsService;
 
 /**
  * Class HubspotFormsDataSource

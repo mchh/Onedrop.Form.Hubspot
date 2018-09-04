@@ -1,18 +1,10 @@
 <?php
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2018 Hans Hoechtl <hhoechtl@1drop.de>
- *  All rights reserved
- ***************************************************************/
-
-namespace Onedrop\NeosHubspot\Domain\Model;
-
+namespace Onedrop\Neos\Hubspot\Domain\Model;
 
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\Flow\Annotations as Flow;
 use Neos\Form\Factory\ArrayFormFactory;
-use Onedrop\NeosHubspot\Service\FormsService;
+use Onedrop\Neos\Hubspot\Service\FormsService;
 
 class FormNode extends Node
 {

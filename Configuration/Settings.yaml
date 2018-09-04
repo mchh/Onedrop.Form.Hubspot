@@ -8,4 +8,3 @@ Neos:
     fusion:
       autoInclude:
         Onedrop.Neos.Hubspot: true
-        Onedrop.NeosHubspot: true

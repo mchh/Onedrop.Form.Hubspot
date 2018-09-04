@@ -1,9 +1,9 @@
 <?php
-namespace Onedrop\NeosHubspot\Command;
+namespace Onedrop\Neos\Hubspot\Command;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
-use Onedrop\NeosHubspot\Service\FormsService;
+use Onedrop\Neos\Hubspot\Service\FormsService;
 
 /**
  * Class FormsCommandController
