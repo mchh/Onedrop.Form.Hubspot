@@ -1,0 +1,13 @@
+prototype(Onedrop.Neos.Hubspot:Component.Molecule.Form) < prototype(Neos.Fusion:Component) {
+    @styleguide {
+        props {
+            content = 'ASDF'
+        }
+    }
+
+    content = ''
+
+    renderer = afx`
+        <div>{props.content}</div>
+    `
+}

@@ -1,0 +1,25 @@
+'Onedrop.Neos.Hubspot:Content.Form':
+  superTypes:
+    'Neos.Neos:Content': true
+  ui:
+    label: 'Hubspot Formular'
+    icon: 'fas fa-clipboard-list'
+    position: 600
+    inspector:
+      groups:
+        form:
+          label: 'Formulareinstellungen'
+          position: 30
+          icon: 'fas fa-clipboard-list'
+  properties:
+    formIdentifier:
+      type: string
+      ui:
+        label: 'Hubspot Formular'
+        reloadIfChanged: true
+        inspector:
+          group: form
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            placeholder: 'Formular wählen'
+            dataSourceIdentifier: 'onedrop-hubspot-forms'

@@ -1,0 +1,13 @@
+Onedrop\NeosHubspot\Service\FormsService:
+  properties:
+    cache:
+      object:
+        factoryObjectName: Neos\Flow\Cache\CacheManager
+        factoryMethodName: getCache
+        arguments:
+          1:
+            value: Onedrop_Neos_Hubspot
+    forms:
+      object:
+        factoryObjectName: Onedrop\NeosHubspot\Domain\Factory\FormsFactory
+        factoryMethodName: getForms
