@@ -1,5 +1,11 @@
+prototype(Onedrop.Neos.Hubspot:FormRenderer) {
+    @class = 'Onedrop\\Neos\\Hubspot\\FusionObjects\\HubspotFormRenderer'
+}
+
 prototype(Onedrop.Neos.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {
     renderer = Onedrop.Neos.Hubspot:Component.Molecule.Form {
-        content = ${node.formConfiguration}
+        form = Onedrop.Neos.Hubspot:FormRenderer {
+            identifier = ${q(node).property('formIdentifier')}
+        }
     }
 }

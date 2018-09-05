@@ -46,7 +46,7 @@ class FormsService
             function (array $form) {
                 return [
                     'identifier' => $form['guid'],
-                    'label'      => $form['name'],
+                    'label' => $form['name'],
                     'formGroups' => $form['formFieldGroups'],
                 ];
             },

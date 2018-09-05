@@ -8,3 +8,9 @@ Neos:
     fusion:
       autoInclude:
         Onedrop.Neos.Hubspot: true
+  Form:
+    presets:
+      default:
+        finisherPresets:
+          'Onedrop.Neos.Hubspot:HubSpotFinisher':
+            implementationClassName: 'Onedrop\Neos\Hubspot\Form\Finisher\HubSpotFinisher'
