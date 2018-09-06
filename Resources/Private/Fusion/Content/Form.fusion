@@ -1,10 +1,10 @@
-prototype(Onedrop.Neos.Hubspot:FormRenderer) {
-    @class = 'Onedrop\\Neos\\Hubspot\\FusionObjects\\HubspotFormRenderer'
+prototype(Onedrop.Form.Hubspot:FormRenderer) {
+    @class = 'Onedrop\\Form\\Hubspot\\FusionObjects\\HubspotFormRenderer'
 }
 
-prototype(Onedrop.Neos.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {
-    renderer = Onedrop.Neos.Hubspot:Component.Molecule.Form {
-        form = Onedrop.Neos.Hubspot:FormRenderer {
+prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {
+    renderer = Onedrop.Form.Hubspot:Component.Molecule.Form {
+        form = Onedrop.Form.Hubspot:FormRenderer {
             identifier = ${q(node).property('formIdentifier')}
         }
     }

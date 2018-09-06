@@ -1,5 +1,5 @@
 <?php
-namespace Onedrop\Neos\Hubspot\Service;
+namespace Onedrop\Form\Hubspot\Service;
 
 use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;
@@ -10,7 +10,8 @@ use SevenShores\Hubspot\Resources\Forms;
  */
 class FormsService
 {
-    const CACHE_KEY = 'forms';
+    const CACHE_KEY_ALL = 'all_forms';
+    const CACHE_KEY_ONE = 'forms';
 
     /**
      * Injection configured via Objects.yaml
@@ -27,22 +28,21 @@ class FormsService
     protected $cache = null;
 
     /**
-     *
+     * @return array|mixed
+     * @throws \Neos\Cache\Exception
      */
     public function listAll()
     {
-        if (!$this->cache->has(self::CACHE_KEY)) {
-            $forms = $this->forms->all();
-            if (200 !== $forms->getStatusCode()) {
-                return [];
-            }
-            $forms = $forms->toArray();
-            $this->cache->set(self::CACHE_KEY, $forms);
-        } else {
-            $forms = $this->cache->get(self::CACHE_KEY);
+        if ($this->cache->has(self::CACHE_KEY_ALL)) {
+            return $this->cache->get(self::CACHE_KEY_ALL);
         }
 
-        return array_map(
+        $response = $this->forms->all();
+        if (200 !== $response->getStatusCode()) {
+            return [];
+        }
+
+        $forms = array_map(
             function (array $form) {
                 return [
                     'identifier' => $form['guid'],
@@ -50,17 +50,35 @@ class FormsService
                     'formGroups' => $form['formFieldGroups'],
                 ];
             },
-            $forms
+            $response->toArray()
         );
+        $forms = array_combine(array_column($forms, 'identifier'), $forms);
+        $this->cache->set(self::CACHE_KEY_ALL, $forms);
+
+        return $forms;
     }
 
     /**
-     * @param string $hubspotFormIdentifier
+     * @param string $formIdentifier
      * @return array
-     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     * @throws \Neos\Cache\Exception
      */
-    public function getFormByIdentifier(string $hubspotFormIdentifier): array
+    public function getFormByIdentifier(string $formIdentifier): array
     {
-        return $this->forms->getById($hubspotFormIdentifier)->toArray();
+        $cacheIdentifier = implode('|', [self::CACHE_KEY_ONE, $formIdentifier]);
+
+        if ($this->cache->has($cacheIdentifier)) {
+            return $this->cache->get($cacheIdentifier);
+        }
+
+        $response = $this->forms->getById($formIdentifier);
+        if (200 !== $response->getStatusCode()) {
+            return [];
+        }
+
+        $form = $response->toArray();
+        $this->cache->set($cacheIdentifier, $form);
+
+        return $form;
     }
 }

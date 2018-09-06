@@ -1,5 +1,5 @@
 <?php
-namespace Onedrop\Neos\Hubspot;
+namespace Onedrop\Form\Hubspot;
 
 /**
  * Class Exception

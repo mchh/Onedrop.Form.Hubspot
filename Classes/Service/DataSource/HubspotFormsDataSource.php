@@ -1,10 +1,10 @@
 <?php
-namespace Onedrop\Neos\Hubspot\Service\DataSource;
+namespace Onedrop\Form\Hubspot\Service\DataSource;
 
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Service\DataSource\AbstractDataSource;
-use Onedrop\Neos\Hubspot\Service\FormsService;
+use Onedrop\Form\Hubspot\Service\FormsService;
 
 /**
  * Class HubspotFormsDataSource
@@ -14,7 +14,7 @@ class HubspotFormsDataSource extends AbstractDataSource
     /**
      * @var string
      */
-    protected static $identifier = 'onedrop-hubspot-forms';
+    protected static $identifier = 'onedrop-form-hubspot-forms';
 
     /**
      * @Flow\Inject()
@@ -25,12 +25,12 @@ class HubspotFormsDataSource extends AbstractDataSource
     /**
      * @param NodeInterface|null $node
      * @param array $arguments
-     * @return \Neos\Flow\Persistence\QueryResultInterface
+     * @throws \Neos\Cache\Exception
+     * @return array|mixed
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getData(NodeInterface $node = null, array $arguments)
     {
-        $forms = $this->formsService->listAll();
-        return array_combine(array_column($forms, 'identifier'), $forms);
+        return $this->formsService->listAll();
     }
 }

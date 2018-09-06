@@ -1,5 +1,5 @@
 {
-    "name": "onedrop/neos-hubspot",
+    "name": "onedrop/form-hubspot",
     "description": "Hubspot Forms connector for Neos. Embedd Forms in Neos native forms and submit them via ajax",
     "type": "neos-package",
     "license": "MIT",
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Onedrop\\Neos\\Hubspot\\": "Classes"
+            "Onedrop\\Form\\Hubspot\\": "Classes"
         }
     }
 }

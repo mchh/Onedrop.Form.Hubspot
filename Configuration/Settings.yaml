@@ -1,5 +1,5 @@
 Onedrop:
-  Neos:
+  Form:
     Hubspot:
       api:
         hapikey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
@@ -7,10 +7,10 @@ Neos:
   Neos:
     fusion:
       autoInclude:
-        Onedrop.Neos.Hubspot: true
+        Onedrop.Form.Hubspot: true
   Form:
     presets:
       default:
         finisherPresets:
-          'Onedrop.Neos.Hubspot:HubSpotFinisher':
-            implementationClassName: 'Onedrop\Neos\Hubspot\Form\Finisher\HubSpotFinisher'
+          'Onedrop.Form.Hubspot:HubSpotFinisher':
+            implementationClassName: 'Onedrop\Form\Hubspot\Form\Finisher\HubSpotFinisher'

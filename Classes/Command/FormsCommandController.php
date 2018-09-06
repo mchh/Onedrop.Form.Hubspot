@@ -1,9 +1,9 @@
 <?php
-namespace Onedrop\Neos\Hubspot\Command;
+namespace Onedrop\Form\Hubspot\Command;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
-use Onedrop\Neos\Hubspot\Service\FormsService;
+use Onedrop\Form\Hubspot\Service\FormsService;
 
 /**
  * Class FormsCommandController
@@ -17,10 +17,12 @@ class FormsCommandController extends CommandController
     protected $formsService = null;
 
     /**
-     *
+     * @throws \Neos\Cache\Exception
      */
     public function listAllCommand()
     {
-        $this->formsService->listAll();
+        foreach ($this->formsService->listAll() as $form) {
+            $this->outputLine($form['identifier'], $form['label']);
+        }
     }
 }

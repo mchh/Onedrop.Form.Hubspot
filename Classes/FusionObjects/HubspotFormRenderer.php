@@ -1,13 +1,13 @@
 <?php
-namespace Onedrop\Neos\Hubspot\FusionObjects;
+namespace Onedrop\Form\Hubspot\FusionObjects;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Http\Response;
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Form\Factory\ArrayFormFactory;
 use Neos\Fusion\FusionObjects\AbstractFusionObject;
-use Onedrop\Neos\Hubspot\Exception;
-use Onedrop\Neos\Hubspot\Service\FormsService;
+use Onedrop\Form\Hubspot\Exception;
+use Onedrop\Form\Hubspot\Service\FormsService;
 
 /**
  * Class HubspotFormRenderer
@@ -42,10 +42,10 @@ class HubspotFormRenderer extends AbstractFusionObject
     ];
 
     /**
-     * @return string
      * @throws Exception
+     * @throws \Neos\Cache\Exception
      * @throws \Neos\Form\Exception\RenderingException
-     * @throws \SevenShores\Hubspot\Exceptions\BadRequest
+     * @return string
      */
     public function evaluate():string
     {

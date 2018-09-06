@@ -1,4 +1,4 @@
-Onedrop\Neos\Hubspot\Service\FormsService:
+Onedrop\Form\Hubspot\Service\FormsService:
   properties:
     cache:
       object:
@@ -6,8 +6,8 @@ Onedrop\Neos\Hubspot\Service\FormsService:
         factoryMethodName: getCache
         arguments:
           1:
-            value: Onedrop_Neos_Hubspot
+            value: Onedrop_Form_Hubspot
     forms:
       object:
-        factoryObjectName: Onedrop\Neos\Hubspot\Domain\Factory\FormsFactory
+        factoryObjectName: Onedrop\Form\Hubspot\Domain\Factory\FormsFactory
         factoryMethodName: getForms

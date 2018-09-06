@@ -1,5 +1,5 @@
 <?php
-namespace Onedrop\Neos\Hubspot\Form\Finisher;
+namespace Onedrop\Form\Hubspot\Form\Finisher;
 
 use Neos\Form\Core\Model\AbstractFinisher;
 

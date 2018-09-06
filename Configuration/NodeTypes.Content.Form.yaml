@@ -1,4 +1,4 @@
-'Onedrop.Neos.Hubspot:Content.Form':
+'Onedrop.Form.Hubspot:Content.Form':
   superTypes:
     'Neos.Neos:Content': true
   ui:
@@ -22,4 +22,4 @@
           editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
           editorOptions:
             placeholder: 'Formular wählen'
-            dataSourceIdentifier: 'onedrop-hubspot-forms'
+            dataSourceIdentifier: 'onedrop-form-hubspot-forms'
