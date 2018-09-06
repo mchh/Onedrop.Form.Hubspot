@@ -3,6 +3,7 @@ namespace Onedrop\Form\Hubspot\Service;
 
 use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;
+use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Resources\Forms;
 
 /**
@@ -103,8 +104,13 @@ class FormsService
      */
     public function submit(string $formIdentifier, array $formData)
     {
-        xdebug_break();
-        $response = $this->forms->submit($this->portalId, $formIdentifier, $formData);
+        try {
+            $response = $this->forms->submit($this->portalId, $formIdentifier, $formData);
+        } catch (BadRequest $exception) {
+            if (400 === $exception->getCode()) {
+                // Validation failed.
+            }
+        }
         switch ($response->getStatusCode()) {
             case 204:
                 return true;
