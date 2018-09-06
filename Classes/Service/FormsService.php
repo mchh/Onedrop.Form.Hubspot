@@ -28,6 +28,12 @@ class FormsService
     protected $cache = null;
 
     /**
+     * @Flow\InjectConfiguration(path="api.portalId")
+     * @var string
+     */
+    protected $portalId = '';
+
+    /**
      * @return array|mixed
      * @throws \Neos\Cache\Exception
      */
@@ -84,5 +90,30 @@ class FormsService
         $this->cache->set($cacheIdentifier, $form);
 
         return $form;
+    }
+
+    /**
+     * For status codes:
+     *
+     * @link https://developers.hubspot.com/docs/methods/forms/submit_form
+     *
+     * @param string $formIdentifier
+     * @param array $formData
+     * @return bool
+     */
+    public function submit(string $formIdentifier, array $formData)
+    {
+        xdebug_break();
+        $response = $this->forms->submit($this->portalId, $formIdentifier, $formData);
+        switch ($response->getStatusCode()) {
+            case 204:
+                return true;
+            case 302:
+            case 404:
+            case 500:
+            default:
+                \Neos\Flow\var_dump($response);
+                die;
+        }
     }
 }

@@ -3,6 +3,10 @@ Onedrop:
     Hubspot:
       api:
         hapikey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        portalId: xxxxxxx
+      finishers:
+        - identifier: Onedrop.Form.Hubspot:HubSpotFinisher
+          options: []
 Neos:
   Neos:
     fusion:

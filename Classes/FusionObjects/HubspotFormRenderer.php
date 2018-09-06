@@ -27,6 +27,12 @@ class HubspotFormRenderer extends AbstractFusionObject
     protected $arrayFormFactory;
 
     /**
+     * @Flow\InjectConfiguration(path="finishers")
+     * @var array
+     */
+    protected $finishers = [];
+
+    /**
      * @var array
      */
     protected $typeMap = [
@@ -47,7 +53,7 @@ class HubspotFormRenderer extends AbstractFusionObject
      * @throws \Neos\Form\Exception\RenderingException
      * @return string
      */
-    public function evaluate():string
+    public function evaluate(): string
     {
         $formIdentifier = $this->fusionValue('identifier');
         $hubspotForm = $this->formService->getFormByIdentifier($formIdentifier);
@@ -60,6 +66,7 @@ class HubspotFormRenderer extends AbstractFusionObject
         $page = $this->getPage('page-one', $sections);
         $formDefinition = $this->getForm($hubspotForm['guid'], $hubspotForm['name'], [$page]);
         $formDefinition['renderingOptions']['_fusionRuntime'] = $this->runtime;
+        $formDefinition['finishers'] = $this->finishers;
 
         $form = $this->arrayFormFactory->build($formDefinition, 'fusion');
         $request = $this->getRuntime()->getControllerContext()->getRequest();
