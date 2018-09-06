@@ -19,7 +19,7 @@ class FormsFactory
     /**
      * @return Forms
      */
-    public function getForms()
+    public function getForms(): Forms
     {
         return Factory::create($this->settings['api']['hapikey'])->forms();
     }

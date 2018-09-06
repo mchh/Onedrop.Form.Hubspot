@@ -37,7 +37,7 @@ class FormsService
      * @return array|mixed
      * @throws \Neos\Cache\Exception
      */
-    public function listAll()
+    public function listAll(): array
     {
         if ($this->cache->has(self::CACHE_KEY_ALL)) {
             return $this->cache->get(self::CACHE_KEY_ALL);

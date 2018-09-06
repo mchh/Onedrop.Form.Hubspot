@@ -19,12 +19,7 @@ class HubSpotFinisher extends AbstractFinisher
     protected $formsService;
 
     /**
-     * This method is called in the concrete finisher whenever self::execute() is called.
      *
-     * Override and fill with your own implementation!
-     *
-     * @return void
-     * @api
      */
     protected function executeInternal()
     {

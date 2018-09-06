@@ -26,10 +26,10 @@ class HubspotFormsDataSource extends AbstractDataSource
      * @param NodeInterface|null $node
      * @param array $arguments
      * @throws \Neos\Cache\Exception
-     * @return array|mixed
+     * @return array
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function getData(NodeInterface $node = null, array $arguments)
+    public function getData(NodeInterface $node = null, array $arguments): array
     {
         return $this->formsService->listAll();
     }

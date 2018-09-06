@@ -134,7 +134,7 @@ class HubspotFormRenderer extends AbstractFusionObject
      * @param array $children
      * @return array
      */
-    protected function renderSection(string $identifier, array $children)
+    protected function renderSection(string $identifier, array $children): array
     {
         return [
             'type' => 'Neos.Form:Section',
@@ -150,7 +150,7 @@ class HubspotFormRenderer extends AbstractFusionObject
      * @param array $fields
      * @return array
      */
-    protected function getFields(array $fields)
+    protected function getFields(array $fields): array
     {
         return array_filter(
             array_map(
@@ -166,7 +166,7 @@ class HubspotFormRenderer extends AbstractFusionObject
      * @param array $definition
      * @return array
      */
-    protected function renderField(array $definition)
+    protected function renderField(array $definition): array
     {
         if (!$definition['enabled']) {
             return [];
