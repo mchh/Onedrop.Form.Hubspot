@@ -59,13 +59,17 @@ class FormsService
     }
 
     /**
-     * @param string $formIdentifier
-     * @return array
+     * @param string|null $formIdentifier
      * @throws \Neos\Cache\Exception
+     * @return array
      */
-    public function getFormByIdentifier(string $formIdentifier): array
+    public function getFormByIdentifier(string $formIdentifier = null): array
     {
-        $cacheIdentifier = implode('|', [self::CACHE_KEY_ONE, $formIdentifier]);
+        if (null === $formIdentifier) {
+            return [];
+        }
+
+        $cacheIdentifier = implode('_', [self::CACHE_KEY_ONE, $formIdentifier]);
 
         if ($this->cache->has($cacheIdentifier)) {
             return $this->cache->get($cacheIdentifier);

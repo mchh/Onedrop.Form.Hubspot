@@ -52,6 +52,10 @@ class HubspotFormRenderer extends AbstractFusionObject
         $formIdentifier = $this->fusionValue('identifier');
         $hubspotForm = $this->formService->getFormByIdentifier($formIdentifier);
 
+        if (empty($hubspotForm)) {
+            return 'Please select a form';
+        }
+
         $sections = $this->getSections($hubspotForm['formFieldGroups']);
         $page = $this->getPage('page-one', $sections);
         $formDefinition = $this->getForm($hubspotForm['guid'], $hubspotForm['name'], [$page]);
