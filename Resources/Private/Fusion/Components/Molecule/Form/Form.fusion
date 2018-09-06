@@ -1,5 +1,13 @@
 prototype(Onedrop.Form.Hubspot:Component.Molecule.Form) < prototype(Neos.Fusion:Component) {
 
+    @cache {
+        mode = 'uncached'
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+        }
+    }
+
     form = ''
 
     renderer = afx`
