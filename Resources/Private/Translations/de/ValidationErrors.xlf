@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file original="" product-name="Neos.Neos" source-language="en" datatype="plaintext" target-language="de">
+        <body>
+            <!-- EmailAddressBlacklistValidator -->
+            <trans-unit id="1536243708" approved="yes">
+                <source>This email address is blacklisted.</source>
+                <target xml:lang="de">Diese E-Mail Adresse ist nicht erlaubt.</target>
+            </trans-unit>
+
+            <!-- FreeEmailAddressProviderValidator -->
+            <trans-unit id="1536243713" approved="yes">
+                <source>Please provide a real email address.</source>
+                <target xml:lang="de">Bitte geben Sie eine richtige E-Mail Adresse an.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

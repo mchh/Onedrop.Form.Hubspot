@@ -180,9 +180,19 @@ class HubspotFormRenderer extends AbstractFusionObject
         $defaultValue = $definition['defaultValue'];
 
         if ($definition['required']) {
-            $validators[] = [
-                'identifier' => 'Neos.Flow:NotEmpty',
-            ];
+            $validators[] = ['identifier' => 'Neos.Flow:NotEmpty'];
+        }
+        if (isset($definition['validation'])) {
+            $validation = $definition['validation'];
+            if (isset($validation['useDefaultBlockList']) && true === $validation['useDefaultBlockList']) {
+                $validators[] = ['identifier' => 'Onedrop.Form.Hubspot:FreeEmailAddressProvider'];
+            }
+            if (!empty($validation['data'])) {
+                $validators[] = [
+                    'identifier' => 'Onedrop.Form.Hubspot:EmailAddressBlacklist',
+                    'options' => ['blacklist' => $validation['data']],
+                ];
+            }
         }
         if (!empty($definition['placeholder'])) {
             $properties['placeholder'] = $definition['placeholder'];
