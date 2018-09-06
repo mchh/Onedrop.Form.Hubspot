@@ -14,7 +14,12 @@ Neos:
         Onedrop.Form.Hubspot: true
   Form:
     presets:
-      default:
+      fusion:
         finisherPresets:
           'Onedrop.Form.Hubspot:HubSpotFinisher':
-            implementationClassName: 'Onedrop\Form\Hubspot\Form\Finisher\HubSpotFinisher'
+            implementationClassName: Onedrop\Form\Hubspot\Form\Finisher\HubSpotFinisher
+        validatorPresets:
+          'Onedrop.Form.Hubspot:FreeEmailAddressProvider':
+            implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\FreeEmailAddressProviderValidator
+          'Onedrop.Form.Hubspot:EmailAddressBlacklist':
+            implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\EmailAddressBlacklistValidator
