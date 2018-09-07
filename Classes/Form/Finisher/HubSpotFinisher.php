@@ -38,8 +38,8 @@ class HubSpotFinisher extends AbstractFinisher
 
         $hubspotContext = [
             'ipAddress' => $httpRequest->getClientIpAddress(),
-            'pageUrl' => $httpRequest->getUri(),
-            'pageName' => $formRuntime->getFormState()->getFormValue('page') ?? '',
+            'pageUrl'   => $httpRequest->getUri(),
+            'pageName'  => $formRuntime->getFormState()->getFormValue('page') ?? '',
         ];
         if ($httpRequest->hasCookie('hubspotutk')) {
             $hubspotContext['hutk'] = $httpRequest->getCookie('hubspotutk');

@@ -7,7 +7,6 @@ prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentCompon
         mode = 'uncached'
         context {
             1 = 'node'
-            2 = 'documentNode'
         }
     }
     renderer = Onedrop.Form.Hubspot:Component.Molecule.Form {
@@ -15,7 +14,6 @@ prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentCompon
             mode = 'uncached'
             context {
                 1 = 'node'
-                2 = 'documentNode'
             }
         }
         form = Onedrop.Form.Hubspot:FormRenderer {
@@ -23,7 +21,6 @@ prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentCompon
                 mode = 'uncached'
                 context {
                     1 = 'node'
-                    2 = 'documentNode'
                 }
             }
             identifier = ${q(node).property('formIdentifier')}

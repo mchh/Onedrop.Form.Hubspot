@@ -36,15 +36,15 @@ class HubspotFormRenderer extends AbstractFusionObject
      * @var array
      */
     protected $typeMap = [
-        'text' => 'Neos.Form:SingleLineText',
-        'textarea' => 'Neos.Form:MultiLineText',
-        'select' => 'Neos.Form:SingleSelectDropdown',
-        'radio' => 'Neos.Form:SingleSelectRadiobuttons',
-        'checkbox' => 'Neos.Form:MultipleSelectCheckboxes',
+        'text'            => 'Neos.Form:SingleLineText',
+        'textarea'        => 'Neos.Form:MultiLineText',
+        'select'          => 'Neos.Form:SingleSelectDropdown',
+        'radio'           => 'Neos.Form:SingleSelectRadiobuttons',
+        'checkbox'        => 'Neos.Form:MultipleSelectCheckboxes',
         'booleancheckbox' => 'Neos.Form:Checkbox',
-        'number' => 'Neos.Form:SingleLineText',
-        'file' => 'Neos.Form:FileUpload',
-        'date' => 'Neos.Form:DatePicker',
+        'number'          => 'Neos.Form:SingleLineText',
+        'file'            => 'Neos.Form:FileUpload',
+        'date'            => 'Neos.Form:DatePicker',
     ];
 
     /**
@@ -81,40 +81,37 @@ class HubspotFormRenderer extends AbstractFusionObject
     }
 
     /**
-     * @param string $identifier
-     * @param string $label
-     * @param array $children
+     * @param  string $identifier
+     * @param  string $label
+     * @param  array  $children
      * @return array
      */
     protected function getForm(string $identifier, string $label, array $children): array
     {
         return [
-            'type' => 'Neos.Form:Form',
-            'identifier' => $identifier,
-            'label' => $label,
+            'type'        => 'Neos.Form:Form',
+            'identifier'  => $identifier,
+            'label'       => $label,
             'renderables' => $children,
         ];
     }
 
     /**
-     * @param string $identifier
-     * @param array $children
+     * @param  string $identifier
+     * @param  array  $children
      * @return array
      */
     protected function getPage(string $identifier, array $children): array
     {
         return [
-            'type' => 'Neos.Form:Page',
-            'identifier' => $identifier,
-            'renderingOptions' => [
-                'pageClassAttribute' => '',
-            ],
+            'type'        => 'Neos.Form:Page',
+            'identifier'  => $identifier,
             'renderables' => $children,
         ];
     }
 
     /**
-     * @param array $formFieldGroups
+     * @param  array $formFieldGroups
      * @return array
      */
     protected function getSections(array $formFieldGroups): array
@@ -130,14 +127,14 @@ class HubspotFormRenderer extends AbstractFusionObject
     }
 
     /**
-     * @param string $identifier
-     * @param array $children
+     * @param  string $identifier
+     * @param  array  $children
      * @return array
      */
     protected function renderSection(string $identifier, array $children): array
     {
         return [
-            'type' => 'Neos.Form:Section',
+            'type'       => 'Neos.Form:Section',
             'identifier' => $identifier,
             'properties' => [
                 'sectionClassAttribute' => 'row',
@@ -147,7 +144,7 @@ class HubspotFormRenderer extends AbstractFusionObject
     }
 
     /**
-     * @param array $fields
+     * @param  array $fields
      * @return array
      */
     protected function getFields(array $fields): array
@@ -163,7 +160,7 @@ class HubspotFormRenderer extends AbstractFusionObject
     }
 
     /**
-     * @param array $definition
+     * @param  array $definition
      * @return array
      */
     protected function renderField(array $definition): array
@@ -190,7 +187,7 @@ class HubspotFormRenderer extends AbstractFusionObject
             if (!empty($validation['data'])) {
                 $validators[] = [
                     'identifier' => 'Onedrop.Form.Hubspot:EmailAddressBlacklist',
-                    'options' => ['blacklist' => $validation['data']],
+                    'options'    => ['blacklist' => $validation['data']],
                 ];
             }
         }
@@ -217,11 +214,11 @@ class HubspotFormRenderer extends AbstractFusionObject
         }
 
         return [
-            'type' => $type,
-            'identifier' => $identifier,
-            'label' => $label,
-            'validators' => $validators,
-            'properties' => $properties,
+            'type'         => $type,
+            'identifier'   => $identifier,
+            'label'        => $label,
+            'validators'   => $validators,
+            'properties'   => $properties,
             'defaultValue' => $defaultValue,
         ];
     }

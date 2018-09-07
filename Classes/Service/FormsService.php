@@ -35,8 +35,8 @@ class FormsService
     protected $portalId = '';
 
     /**
-     * @return array|mixed
      * @throws \Neos\Cache\Exception
+     * @return array|mixed
      */
     public function listAll(): array
     {
@@ -53,7 +53,7 @@ class FormsService
             function (array $form) {
                 return [
                     'identifier' => $form['guid'],
-                    'label' => $form['name'],
+                    'label'      => $form['name'],
                     'formGroups' => $form['formFieldGroups'],
                 ];
             },
@@ -66,7 +66,7 @@ class FormsService
     }
 
     /**
-     * @param string|null $formIdentifier
+     * @param  string|null           $formIdentifier
      * @throws \Neos\Cache\Exception
      * @return array
      */
@@ -98,8 +98,8 @@ class FormsService
      *
      * @link https://developers.hubspot.com/docs/methods/forms/submit_form
      *
-     * @param string $formIdentifier
-     * @param array $formData
+     * @param  string $formIdentifier
+     * @param  array  $formData
      * @return bool
      */
     public function submit(string $formIdentifier, array $formData)

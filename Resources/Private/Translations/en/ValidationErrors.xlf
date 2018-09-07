@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-    <file original="" product-name="Neos.Neos" source-language="en" datatype="plaintext">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file original="" product-name="Neos.Flow" source-language="en" datatype="plaintext" target-language="de">
         <body>
             <!-- EmailAddressBlacklistValidator -->
             <trans-unit id="1536243708" approved="yes">

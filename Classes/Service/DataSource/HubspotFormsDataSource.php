@@ -23,8 +23,8 @@ class HubspotFormsDataSource extends AbstractDataSource
     protected $formsService = null;
 
     /**
-     * @param NodeInterface|null $node
-     * @param array $arguments
+     * @param  NodeInterface|null    $node
+     * @param  array                 $arguments
      * @throws \Neos\Cache\Exception
      * @return array
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
