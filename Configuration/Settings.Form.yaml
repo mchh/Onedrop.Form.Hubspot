@@ -1,0 +1,52 @@
+Neos:
+  Form:
+    presets:
+      'hubspotAtomicFusion':
+        parentPreset: 'fusion'
+        formElementTypes:
+
+          'Onedrop.Form.Hubspot:Content.Form':
+            superTypes:
+              'Neos.Form:Form': true
+
+          'Onedrop.Form.Hubspot:Component.Molecule.Page':
+            superTypes:
+              'Neos.Form:Page': true
+          'Onedrop.Form.Hubspot:Component.Molecule.Section':
+            superTypes:
+              'Neos.Form:Section': true
+
+          'Onedrop.Form.Hubspot:Component.Atom.SingleLineText':
+            superTypes:
+              'Neos.Form:SingleLineText': true
+          'Onedrop.Form.Hubspot:Component.Atom.MultiLineText':
+            superTypes:
+              'Neos.Form:MultiLineText': true
+          'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown':
+            superTypes:
+              'Neos.Form:SingleSelectDropdown': true
+          'Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons':
+            superTypes:
+              'Neos.Form:SingleSelectRadiobuttons': true
+          'Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes':
+            superTypes:
+              'Neos.Form:MultipleSelectCheckboxes': true
+          'Onedrop.Form.Hubspot:Component.Atom.Checkbox':
+            superTypes:
+              'Neos.Form:Checkbox': true
+          'Onedrop.Form.Hubspot:Component.Atom.FileUpload':
+            superTypes:
+              'Neos.Form:FileUpload': true
+          'Onedrop.Form.Hubspot:Component.Atom.DatePicker':
+            superTypes:
+              'Neos.Form:DatePicker': true
+
+        finisherPresets:
+          'Onedrop.Form.Hubspot:HubSpotFinisher':
+            implementationClassName: Onedrop\Form\Hubspot\Form\Finisher\HubSpotFinisher
+
+        validatorPresets:
+          'Onedrop.Form.Hubspot:FreeEmailAddressProvider':
+            implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\FreeEmailAddressProviderValidator
+          'Onedrop.Form.Hubspot:EmailAddressBlacklist':
+            implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\EmailAddressBlacklistValidator

@@ -7,19 +7,10 @@ Onedrop:
       finishers:
         - identifier: Onedrop.Form.Hubspot:HubSpotFinisher
           options: []
+  AjaxForm:
+    includeJavascript: true
 Neos:
   Neos:
     fusion:
       autoInclude:
         Onedrop.Form.Hubspot: true
-  Form:
-    presets:
-      fusion:
-        finisherPresets:
-          'Onedrop.Form.Hubspot:HubSpotFinisher':
-            implementationClassName: Onedrop\Form\Hubspot\Form\Finisher\HubSpotFinisher
-        validatorPresets:
-          'Onedrop.Form.Hubspot:FreeEmailAddressProvider':
-            implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\FreeEmailAddressProviderValidator
-          'Onedrop.Form.Hubspot:EmailAddressBlacklist':
-            implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\EmailAddressBlacklistValidator

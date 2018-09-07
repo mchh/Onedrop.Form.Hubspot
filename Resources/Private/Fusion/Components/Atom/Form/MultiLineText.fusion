@@ -1,0 +1,45 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.MultiLineText) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+
+    @styleguide {
+        title = 'MultiLineText'
+        description = 'Textarea Form Element (textarea)'
+
+        props {
+            label = 'The label'
+            id = 'the-id'
+            class = 'form-control'
+            errorClass = 'form-error'
+            name = 'the-name'
+            isRequired = false
+        }
+
+        propSets {
+            'predefined value' {
+                value = 'Aaaaaaa asdf asdf'
+            }
+            'With two validation errors' {
+                validationErrors {
+                    0 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                        arguments = Neos.Fusion:RawArray
+                    }
+                    1 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                        arguments = Neos.Fusion:RawArray
+                    }
+                }
+            }
+        }
+    }
+
+    renderer = afx`
+        <textarea
+            id={props.id}
+            class={props.class}
+            name={props.name}
+            required={props.isRequired}
+        >
+            {props.value}
+        </textarea>
+    `
+}

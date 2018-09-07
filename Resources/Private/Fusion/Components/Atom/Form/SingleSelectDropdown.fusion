@@ -1,0 +1,59 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+
+    @styleguide {
+        title = 'SingleSelectDropdown'
+        description = 'Single select dropdown Form Element (select)'
+
+        props {
+            label = 'The label'
+            name = 'name'
+            value = 'value2'
+            isRequired = false
+            properties {
+                prependOptionLabel = '- select -'
+                options = Neos.Fusion:RawArray {
+                    value1 = 'Label 01'
+                    value2 = 'Label 02'
+                    value3 = 'Label 03'
+                }
+            }
+        }
+
+        propSets {
+            'With validation error' {
+                validationErrors = Neos.Fusion:RawArray {
+                    0 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                        arguments = Neos.Fusion:RawArray
+                    }
+                }
+            }
+            'With two validation errors' {
+                validationErrors {
+                    0 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                        arguments = Neos.Fusion:RawArray
+                    }
+                    1 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                        arguments = Neos.Fusion:RawArray
+                    }
+                }
+            }
+        }
+    }
+
+    renderer = afx`
+        <select
+            id={props.id}
+            name={props.name}
+            required={props.isRequired}
+            autocomplete={props.properties.autocomplete ? props.properties.autocomplete : false}
+        >
+            <option value="" @if.hasPrependOptionLabel={props.properties.prependOptionLabel != null}>{props.properties.prependOptionLabel}</option>
+            <Neos.Fusion:Collection collection={props.properties.options} itemName="optionLabel" itemKey="optionValue" @children="itemRenderer">
+                <option value={optionValue} selected={props.value == optionValue}>{optionLabel}</option>
+            </Neos.Fusion:Collection>
+        </select>
+    `
+}

@@ -1,28 +1,10 @@
-prototype(Onedrop.Form.Hubspot:FormRenderer) {
-    @class = 'Onedrop\\Form\\Hubspot\\FusionObjects\\HubspotFormRenderer'
+prototype(Onedrop.Form.Hubspot:FormRuntimeFactory) {
+    @class = 'Onedrop\\Form\\Hubspot\\FusionObjects\\FormRuntimeFactory'
 }
 
 prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {
-    @cache {
-        mode = 'uncached'
-        context {
-            1 = 'node'
-        }
-    }
     renderer = Onedrop.Form.Hubspot:Component.Molecule.Form {
-        @cache {
-            mode = 'uncached'
-            context {
-                1 = 'node'
-            }
-        }
-        form = Onedrop.Form.Hubspot:FormRenderer {
-            @cache {
-                mode = 'uncached'
-                context {
-                    1 = 'node'
-                }
-            }
+        formRuntime = Onedrop.Form.Hubspot:FormRuntimeFactory {
             identifier = ${q(node).property('formIdentifier')}
         }
     }

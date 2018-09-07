@@ -1,0 +1,39 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+
+    @styleguide {
+        label = "MultipleSelectCheckboxes"
+
+        props {
+            properties = Neos.Fusion:RawArray {
+                options = Neos.Fusion:RawArray {
+                    0 = Onedrop.Form.Hubspot:Component.Atom.Checkbox {
+                        label = 'some-string'
+                        id = 'some-string'
+                        class = 'some-string'
+                        name = 'some-string'
+                        value = 'some-string'
+                        isRequired = 'some-string'
+                    }
+                }
+            }
+        }
+    }
+
+    renderer = afx`
+        <ul class="inputs-list">
+            <Neos.Fusion:Collection collection={props.properties.options} @children="itemRenderer" item="option">
+                <li>
+                    <input
+                        type="checkbox"
+                        id={option.id}
+                        class={option.class}
+                        name={option.name}
+                        required={option.isRequired}
+                        value={option.value}
+                        checked={option.value == props.value}
+                    />
+                </li>
+            </Neos.Fusion:Collection>
+        </ul>
+    `
+}

@@ -1,0 +1,21 @@
+prototype(Onedrop.Form.Hubspot:Component.Molecule.Page) < prototype(Neos.Fusion:Component) {
+
+    formRuntime = null
+    containerElement = null
+
+    renderer = afx`
+        <fieldset class={containerElement.properties.elementClassAttribute}>
+            <legend @if.hasLabel={containerElement.label}>
+                {Neos.Form.translateAndEscapeProperty(props.containerElement, 'label')}
+            </legend>
+            <Neos.Fusion:Collection collection={props.containerElement.elements} itemName="element" @children="itemRenderer" iterationName="itemIterator">
+                <Neos.Fusion:Renderer
+                    type={element.type}
+                    element.containerElement={element}
+                    element.formRuntime={props.formRuntime}
+                />
+            </Neos.Fusion:Collection>
+        </fieldset>
+    `
+
+}

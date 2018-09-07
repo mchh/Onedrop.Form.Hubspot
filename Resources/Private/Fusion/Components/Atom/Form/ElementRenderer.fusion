@@ -1,0 +1,26 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.ElementRenderer) < prototype(Neos.Fusion:Component) {
+
+    element = null
+    formRuntime = null
+
+    renderer = Neos.Fusion:Renderer {
+        type = ${props.element.type}
+        element {
+            id = ${props.element.uniqueIdentifier}
+            class =  ${props.element.properties.elementClassAttribute}
+            errorClass =  ${props.element.properties.elementErrorClassAttribute}
+            name =  ${'--' + props.formRuntime.identifier + '[' + props.element.identifier + ']'}
+            label = ${props.element.label}
+            value = ${Neos.Form.elementValue(props.formRuntime, props.element)}
+            isRequired = ${props.element.required}
+            properties = ${props.element.properties}
+            validationErrors = ${Neos.Form.validationErrors(props.formRuntime, props.element)}
+            childElements = ${props.element.elements}
+        }
+    }
+
+    renderer.@process.renderCallbacks = Neos.Form.FusionRenderer:RenderCallbacks {
+        formRuntime = ${props.formRuntime}
+        formElement = ${props.element}
+    }
+}

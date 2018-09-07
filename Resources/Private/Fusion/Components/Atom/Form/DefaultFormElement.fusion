@@ -1,0 +1,23 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) < prototype(Neos.Fusion:Component) {
+    # API
+    id = ''
+    class = ''
+    errorClass = ''
+    name = ''
+    label = ''
+    value = null
+    isRequired = false
+    properties = Neos.Fusion:RawArray
+    validationErrors = Neos.Fusion:RawArray
+
+
+    formRuntime = null
+    containerElement = null
+    # /API
+
+    renderer.@process.defaultElementWrapping = afx`
+        <Onedrop.Form.Hubspot:Component.Atom.ElementLabel id={props.id} label={props.label} isRequired={props.isRequired} />
+        {value}
+        <Onedrop.Form.Hubspot:Component.Atom.ElementValidationErrors validationErrors={props.validationErrors} />
+    `
+}

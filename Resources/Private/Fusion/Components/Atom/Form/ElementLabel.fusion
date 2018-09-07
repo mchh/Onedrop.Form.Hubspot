@@ -1,0 +1,12 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.ElementLabel) < prototype(Neos.Fusion:Component) {
+
+    id = ''
+    label = ''
+    isRequired = false
+
+    renderer = afx`
+        <label for={props.id} @if.hasLabel={!String.isBlank(props.label)}>
+            {props.label}
+        </label>
+    `
+}

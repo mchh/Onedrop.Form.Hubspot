@@ -118,8 +118,6 @@ class FormsService
             case 404:
             case 500:
             default:
-                \Neos\Flow\var_dump($response);
-                die;
         }
     }
 }

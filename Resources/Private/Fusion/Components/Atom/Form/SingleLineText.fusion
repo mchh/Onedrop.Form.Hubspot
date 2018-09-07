@@ -1,0 +1,48 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.SingleLineText) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+
+    @styleguide {
+        title = 'SingleLineText'
+        description = 'Single line text Form Element (textfield)'
+
+        props {
+            label = 'The label'
+            name = 'name'
+            value = ''
+            isRequired = false
+        }
+
+        propSets {
+            'With validation error' {
+                validationErrors = Neos.Fusion:RawArray {
+                    0 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                    }
+                }
+            }
+            'With two validation errors' {
+                validationErrors {
+                    0 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                    }
+                    1 = Neos.Fusion:RawArray {
+                        code = '1238108068'
+                        arguments = Neos.Fusion:RawArray {
+                            0 = 10
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    renderer = afx`
+        <input
+            type="text"
+            id={props.id}
+            name={props.name}
+            value={props.value}
+            required={props.isRequired}
+            autocomplete={props.properties.autocomplete ? props.properties.autocomplete : false}
+        />
+    `
+}

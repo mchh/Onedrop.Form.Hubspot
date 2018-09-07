@@ -1,0 +1,75 @@
+prototype(Onedrop.Form.Hubspot:Atom.Form.Navigation) < prototype(Neos.Fusion:Component) {
+
+    @styleguide {
+        title = 'FormNavigation'
+        description = 'Form navigation (submit, next, previous buttons)'
+
+        props {
+
+        }
+
+        propSets {
+            'On first of two pages' {
+                numberOfPages = 2
+                currentPageIndex = 0
+            }
+            'On last of two pages' {
+                numberOfPages = 2
+                currentPageIndex = 1
+            }
+            'On first of three pages' {
+                numberOfPages = 3
+                currentPageIndex = 0
+            }
+            'On second of three pages' {
+                numberOfPages = 3
+                currentPageIndex = 1
+            }
+            'On last of three pages' {
+                numberOfPages = 3
+                currentPageIndex = 2
+            }
+        }
+    }
+
+
+    #API
+    formIdentifier = ''
+    currentPageIndex = 0
+    numberOfPages = 1
+    renderingOptions = Neos.Fusion:RawArray
+    # /API
+
+    renderer.@context.buttonName = ${'--' +  props.formIdentifier + '[__currentPage]'}
+    renderer = afx`
+        <div class="some-class">
+            <button
+                type="submit"
+                class="some-class some-class--previous"
+                name={buttonName}
+                value={props.currentPageIndex - 1}
+                @if.hasPreviousPage={props.currentPageIndex > 0}
+            >
+                {props.renderingOptions.previousButtonLabel ? props.renderingOptions.previousButtonLabel : 'Zurück'}
+            </button>
+            <button
+                type="submit"
+                class="some-class some-class--next"
+                name={buttonName}
+                value={props.currentPageIndex + 1}
+                @if.hasNextPage={props.currentPageIndex < props.numberOfPages - 1}
+            >
+                {props.renderingOptions.nextButtonLabel ? props.renderingOptions.nextButtonLabel : 'Weiter'}
+            </button>
+            <button
+                type="submit"
+                class="some-class some-class--submit"
+                name={buttonName}
+                value={props.currentPageIndex + 1}
+                @if.hasNoNextPage={props.currentPageIndex == props.numberOfPages - 1}
+            >
+                {props.renderingOptions.submitButtonLabel ? props.renderingOptions.submitButtonLabel : 'Submit'}
+            </button>
+        </div>
+    `
+}

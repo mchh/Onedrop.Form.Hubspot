@@ -4,6 +4,7 @@ namespace Onedrop\Form\Hubspot\FusionObjects;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Http\Response;
 use Neos\Flow\Mvc\ActionRequest;
+use Neos\Form\Core\Runtime\FormRuntime;
 use Neos\Form\Factory\ArrayFormFactory;
 use Neos\Fusion\FusionObjects\AbstractFusionObject;
 use Onedrop\Form\Hubspot\Exception;
@@ -12,7 +13,7 @@ use Onedrop\Form\Hubspot\Service\FormsService;
 /**
  * Class HubspotFormRenderer
  */
-class HubspotFormRenderer extends AbstractFusionObject
+class FormRuntimeFactory extends AbstractFusionObject
 {
     /**
      * @var FormsService
@@ -36,24 +37,23 @@ class HubspotFormRenderer extends AbstractFusionObject
      * @var array
      */
     protected $typeMap = [
-        'text'            => 'Neos.Form:SingleLineText',
-        'textarea'        => 'Neos.Form:MultiLineText',
-        'select'          => 'Neos.Form:SingleSelectDropdown',
-        'radio'           => 'Neos.Form:SingleSelectRadiobuttons',
-        'checkbox'        => 'Neos.Form:MultipleSelectCheckboxes',
-        'booleancheckbox' => 'Neos.Form:Checkbox',
-        'number'          => 'Neos.Form:SingleLineText',
-        'file'            => 'Neos.Form:FileUpload',
-        'date'            => 'Neos.Form:DatePicker',
+        'text' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
+        'textarea' => 'Onedrop.Form.Hubspot:Component.Atom.MultiLineText',
+        'select' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown',
+        'radio' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons',
+        'checkbox' => 'Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes',
+        'booleancheckbox' => 'Onedrop.Form.Hubspot:Component.Atom.Checkbox',
+        'number' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
+        'file' => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
+        'date' => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
     ];
 
     /**
      * @throws Exception
      * @throws \Neos\Cache\Exception
-     * @throws \Neos\Form\Exception\RenderingException
-     * @return string
+     * @return FormRuntime
      */
-    public function evaluate(): string
+    public function evaluate(): FormRuntime
     {
         $formIdentifier = $this->fusionValue('identifier');
         $hubspotForm = $this->formService->getFormByIdentifier($formIdentifier);
@@ -68,44 +68,44 @@ class HubspotFormRenderer extends AbstractFusionObject
         $formDefinition['renderingOptions']['_fusionRuntime'] = $this->runtime;
         $formDefinition['finishers'] = $this->finishers;
 
-        $form = $this->arrayFormFactory->build($formDefinition, 'fusion');
+        $form = $this->arrayFormFactory->build($formDefinition, 'hubspotAtomicFusion');
+
         $request = $this->getRuntime()->getControllerContext()->getRequest();
         $response = $this->getRuntime()->getControllerContext()->getResponse();
 
         if (!($request instanceof ActionRequest)) {
             throw new Exception('Can not render a form outside of action requests');
         }
-        $formRuntime = $form->bind($request, new Response($response));
 
-        return $formRuntime->render();
+        return $form->bind($request, new Response($response));
     }
 
     /**
      * @param  string $identifier
      * @param  string $label
-     * @param  array  $children
+     * @param  array $children
      * @return array
      */
     protected function getForm(string $identifier, string $label, array $children): array
     {
         return [
-            'type'        => 'Neos.Form:Form',
-            'identifier'  => $identifier,
-            'label'       => $label,
+            'type' => 'Onedrop.Form.Hubspot:Content.Form',
+            'identifier' => $identifier,
+            'label' => $label,
             'renderables' => $children,
         ];
     }
 
     /**
      * @param  string $identifier
-     * @param  array  $children
+     * @param  array $children
      * @return array
      */
     protected function getPage(string $identifier, array $children): array
     {
         return [
-            'type'        => 'Neos.Form:Page',
-            'identifier'  => $identifier,
+            'type' => 'Onedrop.Form.Hubspot:Component.Molecule.Page',
+            'identifier' => $identifier,
             'renderables' => $children,
         ];
     }
@@ -128,13 +128,13 @@ class HubspotFormRenderer extends AbstractFusionObject
 
     /**
      * @param  string $identifier
-     * @param  array  $children
+     * @param  array $children
      * @return array
      */
     protected function renderSection(string $identifier, array $children): array
     {
         return [
-            'type'       => 'Neos.Form:Section',
+            'type' => 'Onedrop.Form.Hubspot:Component.Molecule.Section',
             'identifier' => $identifier,
             'properties' => [
                 'sectionClassAttribute' => 'row',
@@ -187,7 +187,7 @@ class HubspotFormRenderer extends AbstractFusionObject
             if (!empty($validation['data'])) {
                 $validators[] = [
                     'identifier' => 'Onedrop.Form.Hubspot:EmailAddressBlacklist',
-                    'options'    => ['blacklist' => $validation['data']],
+                    'options' => ['blacklist' => $validation['data']],
                 ];
             }
         }
@@ -214,11 +214,11 @@ class HubspotFormRenderer extends AbstractFusionObject
         }
 
         return [
-            'type'         => $type,
-            'identifier'   => $identifier,
-            'label'        => $label,
-            'validators'   => $validators,
-            'properties'   => $properties,
+            'type' => $type,
+            'identifier' => $identifier,
+            'label' => $label,
+            'validators' => $validators,
+            'properties' => $properties,
             'defaultValue' => $defaultValue,
         ];
     }

@@ -1,0 +1,23 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.FileUpload) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+    @styleguide {
+        name = 'FileUpload'
+    }
+
+    href = Neos.Fusion:ResourceUri {
+        path = ${value}
+    }
+
+    renderer = afx`
+        <a @if.hasUpload={value} href={props.href} target="_blank">
+            {elementValue.fileName}
+        </a>
+        <input
+            type="file"
+            id={props.id}
+            class={props.class}
+            name={props.name}
+            required={props.isRequired}
+            value={value}
+        />
+    `
+}

@@ -1,0 +1,46 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.Checkbox) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+
+    @styleguide {
+        title = 'Checkbox'
+        description = 'Single checkbox Form Element (check)'
+
+        props {
+            label = 'The label'
+            id = 'the-id'
+            class = 'form-control form-element'
+            name = 'the-name'
+            value = 'the-value2'
+            isRequired = false
+        }
+
+        propSets {
+            'checkbox checked' {
+                selectedValue = 'the-value2'
+            }
+            'With two validation errors' {
+                validationErrors {
+                    0 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                        arguments = Neos.Fusion:RawArray
+                    }
+                    1 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                        arguments = Neos.Fusion:RawArray
+                    }
+                }
+            }
+        }
+    }
+
+    renderer = afx`
+        <input
+            type="checkbox"
+            id={props.id}
+            class={props.class}
+            name={props.name}
+            required={props.isRequired}
+            value={props.value}
+            checked={props.selectedValue == props.value}
+        />
+    `
+}
