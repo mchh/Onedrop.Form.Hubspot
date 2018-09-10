@@ -29,10 +29,10 @@ class FormRuntimeFactory extends AbstractFusionObject
     protected $formDefinitionFactory = null;
 
     /**
-     * @return FormRuntime
      * @throws Exception
      * @throws \Neos\Cache\Exception
      * @throws \Neos\Flow\Mvc\Exception\NoSuchArgumentException
+     * @return FormRuntime
      */
     public function evaluate(): FormRuntime
     {

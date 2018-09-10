@@ -41,11 +41,11 @@ class AjaxFormController extends ActionController
     protected $fusionService = null;
 
     /**
-     * @param string $formIdentifier
-     * @return string
+     * @param  string                                  $formIdentifier
      * @throws \Neos\Cache\Exception
      * @throws \Neos\Form\Exception\RenderingException
      * @throws \Neos\Neos\Domain\Exception
+     * @return string
      */
     public function submitAction(string $formIdentifier)
     {

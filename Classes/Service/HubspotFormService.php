@@ -53,7 +53,7 @@ class HubspotFormService
             function (array $form) {
                 return [
                     'identifier' => $form['guid'],
-                    'label' => $form['name'],
+                    'label'      => $form['name'],
                     'formGroups' => $form['formFieldGroups'],
                 ];
             },
@@ -66,7 +66,7 @@ class HubspotFormService
     }
 
     /**
-     * @param  string|null $formIdentifier
+     * @param  string|null           $formIdentifier
      * @throws \Neos\Cache\Exception
      * @return array
      */
@@ -98,10 +98,10 @@ class HubspotFormService
      *
      * @link https://developers.hubspot.com/docs/methods/forms/submit_form
      *
-     * @param  string $formIdentifier
-     * @param  array $formData
-     * @return mixed
+     * @param  string                $formIdentifier
+     * @param  array                 $formData
      * @throws \Neos\Cache\Exception
+     * @return mixed
      */
     public function submit(string $formIdentifier, array $formData)
     {

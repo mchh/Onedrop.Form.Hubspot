@@ -15,15 +15,15 @@ class FormDefinitionFactory
      * @var array
      */
     protected $typeMap = [
-        'text' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
-        'textarea' => 'Onedrop.Form.Hubspot:Component.Atom.MultiLineText',
-        'select' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown',
-        'radio' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons',
-        'checkbox' => 'Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes',
+        'text'            => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
+        'textarea'        => 'Onedrop.Form.Hubspot:Component.Atom.MultiLineText',
+        'select'          => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown',
+        'radio'           => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons',
+        'checkbox'        => 'Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes',
         'booleancheckbox' => 'Onedrop.Form.Hubspot:Component.Atom.Checkbox',
-        'number' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
-        'file' => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
-        'date' => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
+        'number'          => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
+        'file'            => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
+        'date'            => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
     ];
 
     /**
@@ -39,10 +39,10 @@ class FormDefinitionFactory
     protected $finishers = [];
 
     /**
-     * @param string $formIdentifier
-     * @param Runtime|null $runtime
-     * @return array
+     * @param  string                $formIdentifier
+     * @param  Runtime|null          $runtime
      * @throws \Neos\Cache\Exception
+     * @return array
      */
     public function getFromDefinitionByHubspotIdentifier(string $formIdentifier, Runtime $runtime = null): array
     {
@@ -64,29 +64,29 @@ class FormDefinitionFactory
     /**
      * @param  string $identifier
      * @param  string $label
-     * @param  array $children
+     * @param  array  $children
      * @return array
      */
     protected function getForm(string $identifier, string $label, array $children): array
     {
         return [
-            'type' => 'Onedrop.Form.Hubspot:Content.Form',
-            'identifier' => $identifier,
-            'label' => $label,
+            'type'        => 'Onedrop.Form.Hubspot:Content.Form',
+            'identifier'  => $identifier,
+            'label'       => $label,
             'renderables' => $children,
         ];
     }
 
     /**
      * @param  string $identifier
-     * @param  array $children
+     * @param  array  $children
      * @return array
      */
     protected function getPage(string $identifier, array $children): array
     {
         return [
-            'type' => 'Onedrop.Form.Hubspot:Component.Molecule.Page',
-            'identifier' => $identifier,
+            'type'        => 'Onedrop.Form.Hubspot:Component.Molecule.Page',
+            'identifier'  => $identifier,
             'renderables' => $children,
         ];
     }
@@ -109,13 +109,13 @@ class FormDefinitionFactory
 
     /**
      * @param  string $identifier
-     * @param  array $children
+     * @param  array  $children
      * @return array
      */
     protected function renderSection(string $identifier, array $children): array
     {
         return [
-            'type' => 'Onedrop.Form.Hubspot:Component.Molecule.Section',
+            'type'       => 'Onedrop.Form.Hubspot:Component.Molecule.Section',
             'identifier' => $identifier,
             'properties' => [
                 'sectionClassAttribute' => 'row',
@@ -168,7 +168,7 @@ class FormDefinitionFactory
             if (!empty($validation['data'])) {
                 $validators[] = [
                     'identifier' => 'Onedrop.Form.Hubspot:EmailAddressBlacklist',
-                    'options' => ['blacklist' => $validation['data']],
+                    'options'    => ['blacklist' => $validation['data']],
                 ];
             }
         }
@@ -195,11 +195,11 @@ class FormDefinitionFactory
         }
 
         return [
-            'type' => $type,
-            'identifier' => $identifier,
-            'label' => $label,
-            'validators' => $validators,
-            'properties' => $properties,
+            'type'         => $type,
+            'identifier'   => $identifier,
+            'label'        => $label,
+            'validators'   => $validators,
+            'properties'   => $properties,
             'defaultValue' => $defaultValue,
         ];
     }
