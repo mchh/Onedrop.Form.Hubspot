@@ -3,7 +3,6 @@ namespace Onedrop\Form\Hubspot\Service;
 
 use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;
-use Neos\Flow\Http\Response;
 use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Resources\Forms;
 
@@ -101,22 +100,16 @@ class HubspotFormService
      *
      * @param  string $formIdentifier
      * @param  array $formData
-     * @return bool
+     * @return mixed
+     * @throws \Neos\Cache\Exception
      */
-    public function submit(string $formIdentifier, array $formData, Response $response)
+    public function submit(string $formIdentifier, array $formData)
     {
         try {
             $apiResponse = $this->forms->submit($this->portalId, $formIdentifier, $formData);
             switch ($apiResponse->getStatusCode()) {
                 case 204:
-                    $form = $this->getFormByIdentifier($formIdentifier);
-                    if (!empty($form['inlineMessage'])) {
-                        $response->setContent($form['inlineMessage']);
-                    } elseif (!empty($form['redirect'])) {
-                        $response->setHeader('Location', $form['redirect']);
-                    }
-
-                    return true;
+                    return $this->getFormByIdentifier($formIdentifier);
                 case 302:
                 case 500:
                 default:
