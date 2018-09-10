@@ -1,4 +1,4 @@
-Onedrop\Form\Hubspot\Service\FormsService:
+Onedrop\Form\Hubspot\Service\HubspotFormService:
   properties:
     cache:
       object:

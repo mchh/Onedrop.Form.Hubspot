@@ -4,7 +4,7 @@ namespace Onedrop\Form\Hubspot\Form\Finisher;
 use Neos\Flow\Annotations as Flow;
 use Neos\Form\Core\Model\AbstractFinisher;
 use Neos\Form\Core\Model\AbstractFormElement;
-use Onedrop\Form\Hubspot\Service\FormsService;
+use Onedrop\Form\Hubspot\Service\HubspotFormService;
 
 /**
  * Class HubSpotFinisher
@@ -13,9 +13,9 @@ class HubSpotFinisher extends AbstractFinisher
 {
     /**
      * @Flow\Inject()
-     * @var FormsService
+     * @var HubspotFormService
      */
-    protected $formsService;
+    protected $hubspotFormService;
 
     /**
      *
@@ -46,6 +46,6 @@ class HubSpotFinisher extends AbstractFinisher
         }
         $formData['hs_context'] = urlencode(json_encode($hubspotContext));
 
-        $this->formsService->submit($formDefinition->getIdentifier(), $formData);
+        $this->hubspotFormService->submit($formDefinition->getIdentifier(), $formData, $formRuntime->getResponse());
     }
 }

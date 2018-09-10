@@ -1,0 +1,11 @@
+---
+-
+  name: 'Ajax Form Endpoint'
+  uriPattern: '__form/submit'
+  defaults:
+    '@package': 'Onedrop.Form.Hubspot'
+    '@controller': 'AjaxForm'
+    '@action': 'submit'
+    '@format': 'html'
+    'locale': ''
+  httpMethods: ['GET','POST']

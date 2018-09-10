@@ -1,2 +1,9 @@
 include: Components/**/*.fusion
 include: Content/**/*.fusion
+
+
+prototype(Neos.Neos:Page) {
+    body.javascripts.ajaxForms = Neos.Fusion:Tag {
+        @if.hasFormAndIsLiveAndActive = ${q(node).find('[instanceof Onedrop.Form.Hubspot:Content.Form]').is() && node.context.live && Configuration.setting('Onedrop.AjaxForm.includeJavascript')}
+    }
+}

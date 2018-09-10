@@ -1,32 +1,36 @@
 prototype(Onedrop.Form.Hubspot:Component.Molecule.Form) < prototype(Neos.Fusion:Component) {
 
     formRuntime = null
+    formWrapperAttributes = null
 
     renderer = afx`
-        <form
-            method="post"
-            id={props.formRuntime.identifier}
-            class="some-class"
-            action={request.httpRequest.uri + '#' + props.formRuntime.identifier}
-            enctype="multipart/form-data"
-            >
-            <div class="sone-class__content">
-                <h2 class="sone-class__header" @if.hasHeader={props.formRuntime.renderingOptions.header}>{props.formRuntime.renderingOptions.header}</h2>
-                <div style="display:none">
-                    <Neos.Form.FusionRenderer:FormStateHiddenField />
+        <div data-ajax={props.formWrapperAttributes.data-ajax} data-ajax-uri={props.formWrapperAttributes.data-ajax-uri}>
+            <form
+                method="post"
+                id={props.formRuntime.identifier}
+                class="some-class"
+                action={request.httpRequest.uri + '#' + props.formRuntime.identifier}
+                enctype="multipart/form-data"
+                >
+                <div class="sone-class__content">
+                    <h2 class="sone-class__header" @if.hasHeader={props.formRuntime.renderingOptions.header}>{props.formRuntime.renderingOptions.header}</h2>
+                    <div style="display:none">
+                        <Neos.Form.FusionRenderer:FormStateHiddenField />
+                        <input type="hidden" name="formIdentifier" value={props.formRuntime.identifier} />
+                    </div>
+                    <Neos.Fusion:Renderer
+                        type={props.formRuntime.currentPage.type}
+                        element.containerElement={props.formRuntime.currentPage}
+                        element.formRuntime={props.formRuntime}
+                    />
                 </div>
-                <Neos.Fusion:Renderer
-                    type={props.formRuntime.currentPage.type}
-                    element.containerElement={props.formRuntime.currentPage}
-                    element.formRuntime={props.formRuntime}
+                <Onedrop.Form.Hubspot:Atom.Form.Navigation
+                    formIdentifier={props.formRuntime.identifier}
+                    numberOfPages={Array.length(props.formRuntime.pages)}
+                    currentPageIndex={props.formRuntime.currentPage.index}
+                    renderingOptions={props.formRuntime.renderingOptions.navigation ? props.formRuntime.renderingOptions.navigation : []}
                 />
-            </div>
-            <Onedrop.Form.Hubspot:Atom.Form.Navigation
-                formIdentifier={props.formRuntime.identifier}
-                numberOfPages={Array.length(props.formRuntime.pages)}
-                currentPageIndex={props.formRuntime.currentPage.index}
-                renderingOptions={props.formRuntime.renderingOptions.navigation ? props.formRuntime.renderingOptions.navigation : []}
-            />
-        </form>
+            </form>
+        </div>
     `
 }

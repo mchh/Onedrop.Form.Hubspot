@@ -3,13 +3,14 @@ namespace Onedrop\Form\Hubspot\Service;
 
 use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Http\Response;
 use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Resources\Forms;
 
 /**
  * @Flow\Scope("singleton")
  */
-class FormsService
+class HubspotFormService
 {
     const CACHE_KEY_ALL = 'all_forms';
     const CACHE_KEY_ONE = 'forms';
@@ -53,7 +54,7 @@ class FormsService
             function (array $form) {
                 return [
                     'identifier' => $form['guid'],
-                    'label'      => $form['name'],
+                    'label' => $form['name'],
                     'formGroups' => $form['formFieldGroups'],
                 ];
             },
@@ -66,7 +67,7 @@ class FormsService
     }
 
     /**
-     * @param  string|null           $formIdentifier
+     * @param  string|null $formIdentifier
      * @throws \Neos\Cache\Exception
      * @return array
      */
@@ -99,25 +100,31 @@ class FormsService
      * @link https://developers.hubspot.com/docs/methods/forms/submit_form
      *
      * @param  string $formIdentifier
-     * @param  array  $formData
+     * @param  array $formData
      * @return bool
      */
-    public function submit(string $formIdentifier, array $formData)
+    public function submit(string $formIdentifier, array $formData, Response $response)
     {
         try {
-            $response = $this->forms->submit($this->portalId, $formIdentifier, $formData);
+            $apiResponse = $this->forms->submit($this->portalId, $formIdentifier, $formData);
+            switch ($apiResponse->getStatusCode()) {
+                case 204:
+                    $form = $this->getFormByIdentifier($formIdentifier);
+                    if (!empty($form['inlineMessage'])) {
+                        $response->setContent($form['inlineMessage']);
+                    } elseif (!empty($form['redirect'])) {
+                        $response->setHeader('Location', $form['redirect']);
+                    }
+
+                    return true;
+                case 302:
+                case 500:
+                default:
+            }
         } catch (BadRequest $exception) {
             if (400 === $exception->getCode()) {
                 // Validation failed.
             }
-        }
-        switch ($response->getStatusCode()) {
-            case 204:
-                return true;
-            case 302:
-            case 404:
-            case 500:
-            default:
         }
     }
 }

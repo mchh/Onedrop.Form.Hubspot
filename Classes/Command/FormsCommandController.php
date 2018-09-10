@@ -3,7 +3,7 @@ namespace Onedrop\Form\Hubspot\Command;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
-use Onedrop\Form\Hubspot\Service\FormsService;
+use Onedrop\Form\Hubspot\Service\HubspotFormService;
 
 /**
  * Class FormsCommandController
@@ -12,7 +12,7 @@ class FormsCommandController extends CommandController
 {
     /**
      * @Flow\Inject()
-     * @var FormsService
+     * @var HubspotFormService
      */
     protected $formsService = null;
 

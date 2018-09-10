@@ -14,3 +14,11 @@ Neos:
     fusion:
       autoInclude:
         Onedrop.Form.Hubspot: true
+
+  AjaxForm:
+    includeJavascript: true
+  Flow:
+    mvc:
+      routes:
+        'Onedrop.Form.Hubspot':
+          position: 'start'

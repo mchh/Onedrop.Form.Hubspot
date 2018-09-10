@@ -4,7 +4,7 @@ namespace Onedrop\Form\Hubspot\Service\DataSource;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Service\DataSource\AbstractDataSource;
-use Onedrop\Form\Hubspot\Service\FormsService;
+use Onedrop\Form\Hubspot\Service\HubspotFormService;
 
 /**
  * Class HubspotFormsDataSource
@@ -18,7 +18,7 @@ class HubspotFormsDataSource extends AbstractDataSource
 
     /**
      * @Flow\Inject()
-     * @var FormsService
+     * @var HubspotFormService
      */
     protected $formsService = null;
 

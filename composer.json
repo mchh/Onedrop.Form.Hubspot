@@ -13,7 +13,8 @@
         "neos/neos": "^4.0",
         "neos/form": "^4.0",
         "neos/form-fusionrenderer": "1.0.*",
-        "ryanwinchester/hubspot-php": "^1.1"
+        "ryanwinchester/hubspot-php": "^1.1",
+        "sitegeist/monocle": "^4.4"
     },
     "autoload": {
         "psr-4": {
