@@ -32,6 +32,8 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Checkbox) < prototype(Onedrop.Form
         }
     }
 
+    wrapperClass = 'checkbox'
+
     renderer = afx`
         <input
             type="checkbox"

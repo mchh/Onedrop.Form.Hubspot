@@ -32,6 +32,8 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.DatePicker) < prototype(Onedrop.Fo
         }
     }
 
+    wrapperClass = 'date'
+
     renderer = afx`
         <input
             type="date"

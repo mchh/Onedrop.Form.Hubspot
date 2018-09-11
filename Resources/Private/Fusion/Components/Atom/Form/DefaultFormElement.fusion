@@ -9,6 +9,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) < prototype(Ne
     isRequired = false
     properties = Neos.Fusion:RawArray
     validationErrors = Neos.Fusion:RawArray
+    wrapperClass = ''
 
 
     formRuntime = null
@@ -20,4 +21,10 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) < prototype(Ne
         {value}
         <Onedrop.Form.Hubspot:Component.Atom.ElementValidationErrors validationErrors={props.validationErrors} />
     `
+
+    renderer.@process.augment = Neos.Fusion:Augmenter {
+        class = ${props.wrapperClass}
+        class.@process.wrap = ${'a-form-' + value}
+        @if.hasWrapperClass = ${props.wrapperClass}
+    }
 }

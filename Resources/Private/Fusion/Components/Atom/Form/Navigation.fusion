@@ -1,4 +1,4 @@
-prototype(Onedrop.Form.Hubspot:Atom.Form.Navigation) < prototype(Neos.Fusion:Component) {
+prototype(Onedrop.Form.Hubspot:Component.Atom.Form.Navigation) < prototype(Neos.Fusion:Component) {
 
     @styleguide {
         title = 'FormNavigation'

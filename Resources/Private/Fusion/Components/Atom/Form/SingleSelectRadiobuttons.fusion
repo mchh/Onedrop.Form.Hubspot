@@ -42,6 +42,8 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons) < protot
         }
     }
 
+    wrapperClass = 'radio'
+
     renderer = afx`
         <ul>
             <Neos.Fusion:Collection collection={props.properties.options} itemName="optionLabel" itemKey="optionValue" @children="itemRenderer">

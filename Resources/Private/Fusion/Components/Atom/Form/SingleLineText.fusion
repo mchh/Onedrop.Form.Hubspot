@@ -35,6 +35,8 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleLineText) < prototype(Onedro
         }
     }
 
+    wrapperClass = 'input'
+
     renderer = afx`
         <input
             type="text"

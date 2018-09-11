@@ -43,6 +43,8 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown) < prototype(
         }
     }
 
+    wrapperClass = 'select'
+
     renderer = afx`
         <select
             id={props.id}

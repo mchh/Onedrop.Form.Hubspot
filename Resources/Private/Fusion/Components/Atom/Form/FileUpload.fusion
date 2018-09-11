@@ -7,10 +7,10 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.FileUpload) < prototype(Onedrop.Fo
         path = ${value}
     }
 
+    wrapperClass = 'checkbox'
+
     renderer = afx`
-        <a @if.hasUpload={value} href={props.href} target="_blank">
-            {elementValue.fileName}
-        </a>
+        <a @if.hasUpload={value} href={props.href} target="_blank">{elementValue.fileName}</a>
         <input
             type="file"
             id={props.id}
