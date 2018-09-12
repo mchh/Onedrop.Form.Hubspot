@@ -11,7 +11,7 @@ use Onedrop\Form\Hubspot\Domain\Factory\FormDefinitionFactory;
 use Onedrop\Form\Hubspot\Exception;
 
 /**
- * Class HubspotFormRenderer
+ * @SuppressWarnings(PHPMD.LongVariable)
  */
 class FormRuntimeFactory extends AbstractFusionObject
 {
@@ -24,7 +24,6 @@ class FormRuntimeFactory extends AbstractFusionObject
     /**
      * @Flow\Inject()
      * @var FormDefinitionFactory
-     * @SuppressWarnings(PHPMD.LongVariable)
      */
     protected $formDefinitionFactory = null;
 
@@ -46,6 +45,10 @@ class FormRuntimeFactory extends AbstractFusionObject
             ) {
                 $formIdentifier = $request->getArgument('formIdentifier');
             }
+        }
+
+        if (empty($formIdentifier)) {
+            throw Exception::noFormSelected();
         }
 
         $formDefinition = $this->formDefinitionFactory->getFromDefinitionByHubspotIdentifier(

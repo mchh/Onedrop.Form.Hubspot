@@ -1,5 +1,13 @@
 prototype(Onedrop.Form.Hubspot:FormRuntimeFactory) {
     @class = 'Onedrop\\Form\\Hubspot\\FusionObjects\\FormRuntimeFactory'
+
+    noForm = Neos.Fusion:Tag {
+        tagName = 'div'
+        attributes {
+            class = 'onedrophubspot_noform'
+        }
+        content = 'Please select a hubspot form in the element inspector'
+    }
 }
 
 prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {
@@ -18,4 +26,6 @@ prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentCompon
             }
         }
     }
+
+    @exceptionHandler = 'Onedrop\\Form\\Hubspot\\FusionObjects\\ExceptionHandler'
 }
