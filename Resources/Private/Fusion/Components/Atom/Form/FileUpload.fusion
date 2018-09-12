@@ -1,4 +1,5 @@
 prototype(Onedrop.Form.Hubspot:Component.Atom.FileUpload) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+
     @styleguide {
         name = 'FileUpload'
     }
@@ -6,8 +7,6 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.FileUpload) < prototype(Onedrop.Fo
     href = Neos.Fusion:ResourceUri {
         path = ${value}
     }
-
-    wrapperClass = 'checkbox'
 
     renderer = afx`
         <a @if.hasUpload={value} href={props.href} target="_blank">{elementValue.fileName}</a>
@@ -18,6 +17,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.FileUpload) < prototype(Onedrop.Fo
             name={props.name}
             required={props.isRequired}
             value={value}
+            multiple={props.multiple}
         />
     `
 }

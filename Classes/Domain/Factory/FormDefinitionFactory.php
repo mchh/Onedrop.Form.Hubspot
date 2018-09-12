@@ -183,6 +183,7 @@ class FormDefinitionFactory
 
         $properties['elementClassAttribute'] = 'form-control';
         $properties['elementErrorClassAttribute'] = 'form-error';
+        $properties['multiple'] = ('multiple_files' === $definition['name']);
 
         if (!empty($definition['selectedOptions'])) {
             $defaultValue = $definition['selectedOptions'];
