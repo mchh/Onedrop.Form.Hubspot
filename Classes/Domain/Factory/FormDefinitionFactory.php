@@ -70,7 +70,7 @@ class FormDefinitionFactory
     protected function getForm(string $identifier, string $label, array $children): array
     {
         return [
-            'type'        => 'Onedrop.Form.Hubspot:Content.Form',
+            'type'        => 'Onedrop.Form.Hubspot:Component.Molecule.Form',
             'identifier'  => $identifier,
             'label'       => $label,
             'renderables' => $children,

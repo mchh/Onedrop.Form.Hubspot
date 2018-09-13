@@ -5,7 +5,7 @@ Neos:
         parentPreset: 'fusion'
         formElementTypes:
 
-          'Onedrop.Form.Hubspot:Content.Form':
+          'Onedrop.Form.Hubspot:Component.Molecule.Form':
             superTypes:
               'Neos.Form:Form': true
 

@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Onedrop\Form\Hubspot\Controller;
 
-use Neos\ContentRepository\Domain\Factory\NodeFactory;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Service\NodeService;
 use Neos\Flow\Annotations as Flow;
@@ -36,7 +35,6 @@ class AjaxFormController extends ActionController
     public function submitAction(Node $node)
     {
         $this->view->setFusionPath('ajaxForm');
-        $this->view->setControllerContext($this->controllerContext);
         $this->view->assign('value', $node);
     }
 }

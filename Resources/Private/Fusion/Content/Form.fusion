@@ -11,21 +11,13 @@ prototype(Onedrop.Form.Hubspot:FormRuntimeFactory) {
 }
 
 prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {
-    renderer = Onedrop.Form.Hubspot:Component.Molecule.Form {
-        formRuntime = Onedrop.Form.Hubspot:FormRuntimeFactory {
-            identifier = ${q(node).property('formIdentifier')}
-        }
-
-        formWrapperAttributes = Neos.Fusion:RawArray {
-            data-ajax = 'ajax-form'
-            data-ajax-uri = Neos.Fusion:UriBuilder {
-                package = 'Onedrop.Form.Hubspot'
-                controller = 'AjaxForm'
-                action = 'submit'
-                format = 'html'
-            }
-        }
+    content = Onedrop.Form.Hubspot:FormRuntimeFactory {
+        identifier = ${q(node).property('formIdentifier')}
     }
+
+    renderer = afx`
+        <div>{props.content}</div>
+    `
 
     @cache {
         mode = 'uncached'
@@ -38,7 +30,4 @@ prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentCompon
     @exceptionHandler = 'Onedrop\\Form\\Hubspot\\FusionObjects\\ExceptionHandler'
 }
 
-ajaxForm = Onedrop.Form.Hubspot:Content.Form {
-    @context.formIdentifier = ${request.arguments.formIdentifier}
-    renderer.formRuntime.identifier = ${formIdentifier}
-}
+ajaxForm = Onedrop.Form.Hubspot:Content.Form

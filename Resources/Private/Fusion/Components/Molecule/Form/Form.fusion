@@ -1,34 +1,42 @@
 prototype(Onedrop.Form.Hubspot:Component.Molecule.Form) < prototype(Neos.Fusion:Component) {
 
     formRuntime = null
-    formWrapperAttributes = null
+    formWrapperAttributes = Neos.Fusion:RawArray {
+        data-ajax = 'ajax-form'
+        data-ajax-uri = Neos.Fusion:UriBuilder {
+            package = 'Onedrop.Form.Hubspot'
+            controller = 'AjaxForm'
+            action = 'submit'
+            format = 'html'
+        }
+    }
 
     renderer = afx`
         <div data-ajax={props.formWrapperAttributes.data-ajax} data-ajax-uri={props.formWrapperAttributes.data-ajax-uri}>
             <form
                 method="post"
-                id={props.formRuntime.identifier}
+                id={formRuntime.identifier}
                 class="some-class"
-                action={request.httpRequest.uri + '#' + props.formRuntime.identifier}
+                action={request.httpRequest.uri + '#' + formRuntime.identifier}
                 enctype="multipart/form-data"
                 >
                 <div class="sone-class__content">
-                    <h2 class="sone-class__header" @if.hasHeader={props.formRuntime.renderingOptions.header}>{props.formRuntime.renderingOptions.header}</h2>
+                    <h2 class="sone-class__header" @if.hasHeader={formRuntime.renderingOptions.header}>{formRuntime.renderingOptions.header}</h2>
                     <div style="display:none">
                         <Neos.Form.FusionRenderer:FormStateHiddenField />
                         <input type="hidden" name="node" value={node.path} />
                     </div>
                     <Neos.Fusion:Renderer
-                        type={props.formRuntime.currentPage.type}
-                        element.containerElement={props.formRuntime.currentPage}
-                        element.formRuntime={props.formRuntime}
+                        type={formRuntime.currentPage.type}
+                        element.containerElement={formRuntime.currentPage}
+                        element.formRuntime={formRuntime}
                     />
                 </div>
                 <Onedrop.Form.Hubspot:Component.Atom.Form.Navigation
-                    formIdentifier={props.formRuntime.identifier}
-                    numberOfPages={Array.length(props.formRuntime.pages)}
-                    currentPageIndex={props.formRuntime.currentPage.index}
-                    renderingOptions={props.formRuntime.renderingOptions.navigation ? props.formRuntime.renderingOptions.navigation : []}
+                    formIdentifier={formRuntime.identifier}
+                    numberOfPages={Array.length(formRuntime.pages)}
+                    currentPageIndex={formRuntime.currentPage.index}
+                    renderingOptions={formRuntime.renderingOptions.navigation ? formRuntime.renderingOptions.navigation : []}
                 />
             </form>
         </div>

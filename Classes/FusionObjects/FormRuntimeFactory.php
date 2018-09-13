@@ -4,7 +4,6 @@ namespace Onedrop\Form\Hubspot\FusionObjects;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Http\Response;
 use Neos\Flow\Mvc\ActionRequest;
-use Neos\Form\Core\Runtime\FormRuntime;
 use Neos\Form\Factory\ArrayFormFactory;
 use Neos\Fusion\FusionObjects\AbstractFusionObject;
 use Onedrop\Form\Hubspot\Domain\Factory\FormDefinitionFactory;
@@ -28,12 +27,13 @@ class FormRuntimeFactory extends AbstractFusionObject
     protected $formDefinitionFactory = null;
 
     /**
+     * @return string
      * @throws Exception
      * @throws \Neos\Cache\Exception
      * @throws \Neos\Flow\Mvc\Exception\NoSuchArgumentException
-     * @return FormRuntime
+     * @throws \Neos\Form\Exception\RenderingException
      */
-    public function evaluate(): FormRuntime
+    public function evaluate(): string
     {
         $formIdentifier = $this->fusionValue('identifier');
 
@@ -68,8 +68,11 @@ class FormRuntimeFactory extends AbstractFusionObject
             throw new Exception('Can not render without a http response');
         }
 
+        $formDefinition['renderingOptions']['_fusionRuntime'] = $this->runtime;
         $form = $this->arrayFormFactory->build($formDefinition, 'hubspotAtomicFusion');
 
-        return $form->bind($request, new Response($response));
+        $formRuntime = $form->bind($request, new Response($response));
+
+        return $formRuntime->render();
     }
 }
