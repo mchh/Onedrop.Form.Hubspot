@@ -15,7 +15,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Checkbox) < prototype(Onedrop.Form
 
         propSets {
             'checkbox checked' {
-                selectedValue = 'the-value2'
+                defaultValue = 'the-value2'
             }
             'With two validation errors' {
                 validationErrors {
@@ -40,7 +40,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Checkbox) < prototype(Onedrop.Form
             name={props.name}
             required={props.isRequired}
             value={props.value}
-            checked={props.selectedValue == props.value}
+            checked={Type.isArray(props.defaultValue) ? Array.length(props.defaultValue) == 1 : false}
         />
     `
 }

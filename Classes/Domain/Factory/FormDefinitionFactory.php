@@ -193,8 +193,18 @@ class FormDefinitionFactory
         $properties['elementErrorClassAttribute'] = 'form-error';
         $properties['multiple'] = ('multiple_files' === $definition['name']);
 
+        if ('booleancheckbox' === $definition['fieldType']) {
+            xdebug_break();
+            $properties['checked'] = true;
+        }
+
         if (!empty($definition['selectedOptions'])) {
-            $defaultValue = $definition['selectedOptions'];
+            if ('booleancheckbox' === $definition['fieldType']) {
+                xdebug_break();
+                $properties['checked'] = true;
+            } else {
+                $defaultValue = $definition['selectedOptions'];
+            }
         }
         if (!empty($definition['description'])) {
             $properties['elementDescription'] = $definition['description'];

@@ -17,6 +17,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.ElementRenderer) < prototype(Neos.
             validationErrors = ${Neos.Form.validationErrors(props.formRuntime, props.element)}
             childElements = ${props.element.elements}
             multiple = ${props.element.properties.multiple}
+            defaultValue = ${props.element.defaultValue}
         }
     }
 

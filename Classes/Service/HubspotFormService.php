@@ -4,6 +4,7 @@ namespace Onedrop\Form\Hubspot\Service;
 use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;
 use SevenShores\Hubspot\Exceptions\BadRequest;
+use SevenShores\Hubspot\Factory;
 use SevenShores\Hubspot\Resources\Forms;
 
 /**
@@ -15,8 +16,6 @@ class HubspotFormService
     const CACHE_KEY_ONE = 'forms';
 
     /**
-     * Injection configured via Objects.yaml
-     *
      * @var Forms
      */
     protected $forms = null;
@@ -29,10 +28,18 @@ class HubspotFormService
     protected $cache = null;
 
     /**
-     * @Flow\InjectConfiguration(path="api.portalId")
-     * @var string
+     * @Flow\InjectConfiguration()
+     * @var array
      */
-    protected $portalId = '';
+    protected $settings = [];
+
+    /**
+     * HubspotFormService constructor.
+     */
+    public function initializeObject()
+    {
+        $this->forms = Factory::create($this->settings['api']['hapikey'])->forms();
+    }
 
     /**
      * @throws \Neos\Cache\Exception
@@ -53,7 +60,7 @@ class HubspotFormService
             function (array $form) {
                 return [
                     'identifier' => $form['guid'],
-                    'label'      => $form['name'],
+                    'label' => $form['name'],
                     'formGroups' => $form['formFieldGroups'],
                 ];
             },
@@ -66,7 +73,7 @@ class HubspotFormService
     }
 
     /**
-     * @param  string|null           $formIdentifier
+     * @param  string|null $formIdentifier
      * @throws \Neos\Cache\Exception
      * @return array
      */
@@ -78,9 +85,9 @@ class HubspotFormService
 
         $cacheIdentifier = implode('_', [self::CACHE_KEY_ONE, $formIdentifier]);
 
-        if ($this->cache->has($cacheIdentifier)) {
-            return $this->cache->get($cacheIdentifier);
-        }
+//        if ($this->cache->has($cacheIdentifier)) {
+//            return $this->cache->get($cacheIdentifier);
+//        }
 
         $response = $this->forms->getById($formIdentifier);
         if (200 !== $response->getStatusCode()) {
@@ -98,15 +105,15 @@ class HubspotFormService
      *
      * @link https://developers.hubspot.com/docs/methods/forms/submit_form
      *
-     * @param  string                $formIdentifier
-     * @param  array                 $formData
+     * @param  string $formIdentifier
+     * @param  array $formData
      * @throws \Neos\Cache\Exception
      * @return mixed
      */
     public function submit(string $formIdentifier, array $formData)
     {
         try {
-            $apiResponse = $this->forms->submit($this->portalId, $formIdentifier, $formData);
+            $apiResponse = $this->forms->submit($this->settings['api']['portalId'], $formIdentifier, $formData);
             switch ($apiResponse->getStatusCode()) {
                 case 204:
                     return $this->getFormByIdentifier($formIdentifier);

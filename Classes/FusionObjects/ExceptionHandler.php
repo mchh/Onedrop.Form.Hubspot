@@ -16,6 +16,7 @@ class ExceptionHandler extends AbstractRenderingExceptionHandler
      * @param int $referenceCode
      * @return string
      * @throws \Neos\Flow\Security\Exception
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     protected function handle($fusionPath, \Exception $exception, $referenceCode):string
     {

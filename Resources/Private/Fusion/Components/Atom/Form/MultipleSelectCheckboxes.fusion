@@ -21,16 +21,16 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes) < protot
 
     renderer = afx`
         <ul class="inputs-list">
-            <Neos.Fusion:Collection collection={props.properties.options} @children="itemRenderer" item="option">
+            <Neos.Fusion:Collection collection={props.properties.options} @children="itemRenderer" itemName="option" iterationName="itemIterator">
                 <li>
                     <input
                         type="checkbox"
-                        id={option.id}
-                        class={option.class}
-                        name={option.name}
-                        required={option.isRequired}
-                        value={option.value}
-                        checked={option.value == props.value}
+                        id={props.id + itemIterator.cycle}
+                        class={props.class}
+                        name={props.name}
+                        required={props.isRequired}
+                        value={option}
+                        checked={Array.indexOf(props.value, option) > -1}
                     />
                 </li>
             </Neos.Fusion:Collection>
