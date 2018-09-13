@@ -31,6 +31,9 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) < prototype(Ne
             required.@process.wrap = ${' ' + value}
             required.@if.isRequired = ${props.isRequired}
 
+            error = ${this.wrapperClass + '--error'}
+            error.@process.wrap = ${' ' + value}
+            error.@if.isRequired = ${props.validationErrors}
         }
     }
 }
