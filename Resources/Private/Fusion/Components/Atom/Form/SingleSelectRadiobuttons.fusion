@@ -23,7 +23,6 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons) < protot
                 validationErrors = Neos.Fusion:RawArray {
                     0 = Neos.Fusion:RawArray {
                         code = '1221560910'
-                        arguments = Neos.Fusion:RawArray
                     }
                 }
             }
@@ -31,11 +30,9 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons) < protot
                 validationErrors {
                     0 = Neos.Fusion:RawArray {
                         code = '1221560910'
-                        arguments = Neos.Fusion:RawArray
                     }
                     1 = Neos.Fusion:RawArray {
                         code = '1221560910'
-                        arguments = Neos.Fusion:RawArray
                     }
                 }
             }

@@ -21,11 +21,9 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Checkbox) < prototype(Onedrop.Form
                 validationErrors {
                     0 = Neos.Fusion:RawArray {
                         code = '1221560910'
-                        arguments = Neos.Fusion:RawArray
                     }
                     1 = Neos.Fusion:RawArray {
                         code = '1221560910'
-                        arguments = Neos.Fusion:RawArray
                     }
                 }
             }
