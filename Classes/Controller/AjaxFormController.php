@@ -2,66 +2,41 @@
 declare(strict_types=1);
 namespace Onedrop\Form\Hubspot\Controller;
 
+use Neos\ContentRepository\Domain\Factory\NodeFactory;
+use Neos\ContentRepository\Domain\Model\Node;
+use Neos\ContentRepository\Domain\Service\NodeService;
 use Neos\Flow\Annotations as Flow;
-use Neos\Flow\Http\Response;
 use Neos\Flow\Mvc\Controller\ActionController;
-use Neos\Form\Factory\ArrayFormFactory;
-use Neos\Fusion\Core\RuntimeFactory;
-use Onedrop\Form\Hubspot\Domain\Factory\FormDefinitionFactory;
-use Sitegeist\Monocle\Fusion\FusionService;
+use Neos\Neos\View\FusionView;
 
 /**
- * Class AjaxFormController
+ * @SuppressWarnings(PHPMD.LongVariable)
  */
 class AjaxFormController extends ActionController
 {
     /**
-     * @Flow\Inject()
-     * @var ArrayFormFactory
+     * @var string
      */
-    protected $arrayFormFactory = null;
+    protected $defaultViewObjectName = FusionView::class;
+
+    /**
+     * @var FusionView
+     */
+    protected $view = null;
 
     /**
      * @Flow\Inject()
-     * @var FormDefinitionFactory
-     * @SuppressWarnings(PHPMD.LongVariable)
+     * @var NodeService
      */
-    protected $formDefinitionFactory = null;
+    protected $nodeService = null;
 
     /**
-     * @Flow\Inject()
-     * @var RuntimeFactory
+     * @param Node $node
      */
-    protected $runtimeFactory = null;
-
-    /**
-     * @Flow\Inject()
-     * @var FusionService
-     */
-    protected $fusionService = null;
-
-    /**
-     * @param  string                                  $formIdentifier
-     * @throws \Neos\Cache\Exception
-     * @throws \Neos\Form\Exception\RenderingException
-     * @throws \Neos\Neos\Domain\Exception
-     * @return string
-     */
-    public function submitAction(string $formIdentifier)
+    public function submitAction(Node $node)
     {
-        $fusionConfig = $this->fusionService->getMergedFusionObjectTreeForSitePackage('Onedrop.ProSoft');
-        $runtime = $this->runtimeFactory->create($fusionConfig, $this->controllerContext);
-
-        $formDefinition = $this->formDefinitionFactory->getFromDefinitionByHubspotIdentifier($formIdentifier, $runtime);
-        if (empty($formDefinition)) {
-            return 'Please select a form';
-        }
-
-        $runtime->pushContext('identifier', $formIdentifier);
-
-        $formDefinition['renderingOptions']['_fusionRuntime'] = $runtime;
-        $form = $this->arrayFormFactory->build($formDefinition, 'hubspotAtomicFusion');
-
-        return $form->bind($this->request, new Response($this->response))->render();
+        $this->view->setFusionPath('ajaxForm');
+        $this->view->setControllerContext($this->controllerContext);
+        $this->view->assign('value', $node);
     }
 }

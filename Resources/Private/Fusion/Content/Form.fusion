@@ -27,5 +27,18 @@ prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentCompon
         }
     }
 
+    @cache {
+        mode = 'uncached'
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+        }
+    }
+
     @exceptionHandler = 'Onedrop\\Form\\Hubspot\\FusionObjects\\ExceptionHandler'
+}
+
+ajaxForm = Onedrop.Form.Hubspot:Content.Form {
+    @context.formIdentifier = ${request.arguments.formIdentifier}
+    renderer.formRuntime.identifier = ${formIdentifier}
 }

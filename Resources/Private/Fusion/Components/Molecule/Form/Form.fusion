@@ -16,7 +16,7 @@ prototype(Onedrop.Form.Hubspot:Component.Molecule.Form) < prototype(Neos.Fusion:
                     <h2 class="sone-class__header" @if.hasHeader={props.formRuntime.renderingOptions.header}>{props.formRuntime.renderingOptions.header}</h2>
                     <div style="display:none">
                         <Neos.Form.FusionRenderer:FormStateHiddenField />
-                        <input type="hidden" name="formIdentifier" value={props.formRuntime.identifier} />
+                        <input type="hidden" name="node" value={node.path} />
                     </div>
                     <Neos.Fusion:Renderer
                         type={props.formRuntime.currentPage.type}
