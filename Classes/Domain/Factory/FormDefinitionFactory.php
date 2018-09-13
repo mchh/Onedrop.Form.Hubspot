@@ -166,10 +166,18 @@ class FormDefinitionFactory
                 $validators[] = ['identifier' => 'Onedrop.Form.Hubspot:FreeEmailAddressProvider'];
             }
             if (!empty($validation['data'])) {
-                $validators[] = [
-                    'identifier' => 'Onedrop.Form.Hubspot:EmailAddressBlacklist',
-                    'options'    => ['blacklist' => $validation['data']],
-                ];
+                if ('number' === $definition['fieldType']) {
+                    list($minimum, $maximum) = explode(':', $validation['data']);
+                    $validators[] = [
+                        'identifier' => 'Neos.Flow:NumberRange',
+                        'options' => ['minimum' => $minimum, 'maximum' => $maximum],
+                    ];
+                } else {
+                    $validators[] = [
+                        'identifier' => 'Onedrop.Form.Hubspot:EmailAddressBlacklist',
+                        'options' => ['blacklist' => $validation['data']],
+                    ];
+                }
             }
         }
         if (!empty($definition['placeholder'])) {
