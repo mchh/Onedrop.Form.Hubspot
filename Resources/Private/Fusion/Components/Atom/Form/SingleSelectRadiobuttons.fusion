@@ -55,6 +55,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons) < protot
                         value={optionValue}
                         required={props.isRequired}
                         autocomplete={props.properties.autocomplete ? props.properties.autocomplete : false}
+                        checked={Type.isArray(props.value) ? Array.indexOf(props.value, optionValue) > -1 : props.value == optionValue}
                     />
                 </li>
             </Neos.Fusion:Collection>

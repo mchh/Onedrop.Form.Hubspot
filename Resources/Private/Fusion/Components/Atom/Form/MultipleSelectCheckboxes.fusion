@@ -30,7 +30,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes) < protot
                         name={props.name}
                         required={props.isRequired}
                         value={option}
-                        checked={Array.indexOf(props.value, option) > -1}
+                        checked={Type.isArray(props.value) ? Array.indexOf(props.value, option) > -1 : props.value == option}
                     />
                 </li>
             </Neos.Fusion:Collection>

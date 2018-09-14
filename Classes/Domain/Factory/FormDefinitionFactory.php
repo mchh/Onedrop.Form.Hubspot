@@ -15,15 +15,15 @@ class FormDefinitionFactory
      * @var array
      */
     protected $typeMap = [
-        'text'            => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
-        'textarea'        => 'Onedrop.Form.Hubspot:Component.Atom.MultiLineText',
-        'select'          => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown',
-        'radio'           => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons',
-        'checkbox'        => 'Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes',
+        'text' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
+        'textarea' => 'Onedrop.Form.Hubspot:Component.Atom.MultiLineText',
+        'select' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown',
+        'radio' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons',
+        'checkbox' => 'Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes',
         'booleancheckbox' => 'Onedrop.Form.Hubspot:Component.Atom.Checkbox',
-        'number'          => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
-        'file'            => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
-        'date'            => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
+        'number' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
+        'file' => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
+        'date' => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
     ];
 
     /**
@@ -39,8 +39,8 @@ class FormDefinitionFactory
     protected $finishers = [];
 
     /**
-     * @param  string                $formIdentifier
-     * @param  Runtime|null          $runtime
+     * @param  string $formIdentifier
+     * @param  Runtime|null $runtime
      * @throws \Neos\Cache\Exception
      * @return array
      */
@@ -64,29 +64,29 @@ class FormDefinitionFactory
     /**
      * @param  string $identifier
      * @param  string $label
-     * @param  array  $children
+     * @param  array $children
      * @return array
      */
     protected function getForm(string $identifier, string $label, array $children): array
     {
         return [
-            'type'        => 'Onedrop.Form.Hubspot:Component.Molecule.Form',
-            'identifier'  => $identifier,
-            'label'       => $label,
+            'type' => 'Onedrop.Form.Hubspot:Component.Molecule.Form',
+            'identifier' => $identifier,
+            'label' => $label,
             'renderables' => $children,
         ];
     }
 
     /**
      * @param  string $identifier
-     * @param  array  $children
+     * @param  array $children
      * @return array
      */
     protected function getPage(string $identifier, array $children): array
     {
         return [
-            'type'        => 'Onedrop.Form.Hubspot:Component.Molecule.Page',
-            'identifier'  => $identifier,
+            'type' => 'Onedrop.Form.Hubspot:Component.Molecule.Page',
+            'identifier' => $identifier,
             'renderables' => $children,
         ];
     }
@@ -109,13 +109,13 @@ class FormDefinitionFactory
 
     /**
      * @param  string $identifier
-     * @param  array  $children
+     * @param  array $children
      * @return array
      */
     protected function renderSection(string $identifier, array $children): array
     {
         return [
-            'type'       => 'Onedrop.Form.Hubspot:Component.Molecule.Section',
+            'type' => 'Onedrop.Form.Hubspot:Component.Molecule.Section',
             'identifier' => $identifier,
             'properties' => [
                 'sectionClassAttribute' => 'row',
@@ -150,36 +150,7 @@ class FormDefinitionFactory
             return [];
         }
 
-        $type = $this->typeMap[$definition['fieldType']];
-        $identifier = $definition['name'];
-        $label = $definition['label'];
-        $validators = [];
         $properties = [];
-        $defaultValue = $definition['defaultValue'];
-
-        if ($definition['required']) {
-            $validators[] = ['identifier' => 'Neos.Flow:NotEmpty'];
-        }
-        if (isset($definition['validation'])) {
-            $validation = $definition['validation'];
-            if (isset($validation['useDefaultBlockList']) && true === $validation['useDefaultBlockList']) {
-                $validators[] = ['identifier' => 'Onedrop.Form.Hubspot:FreeEmailAddressProvider'];
-            }
-            if (!empty($validation['data'])) {
-                if ('number' === $definition['fieldType']) {
-                    list($minimum, $maximum) = explode(':', $validation['data']);
-                    $validators[] = [
-                        'identifier' => 'Neos.Flow:NumberRange',
-                        'options' => ['minimum' => $minimum, 'maximum' => $maximum],
-                    ];
-                } else {
-                    $validators[] = [
-                        'identifier' => 'Onedrop.Form.Hubspot:EmailAddressBlacklist',
-                        'options' => ['blacklist' => $validation['data']],
-                    ];
-                }
-            }
-        }
         if (!empty($definition['placeholder'])) {
             $properties['placeholder'] = $definition['placeholder'];
         }
@@ -192,20 +163,8 @@ class FormDefinitionFactory
         $properties['elementClassAttribute'] = 'form-control';
         $properties['elementErrorClassAttribute'] = 'form-error';
         $properties['multiple'] = ('multiple_files' === $definition['name']);
+        $properties['defaultChecked'] = false;
 
-        if ('booleancheckbox' === $definition['fieldType']) {
-            xdebug_break();
-            $properties['checked'] = true;
-        }
-
-        if (!empty($definition['selectedOptions'])) {
-            if ('booleancheckbox' === $definition['fieldType']) {
-                xdebug_break();
-                $properties['checked'] = true;
-            } else {
-                $defaultValue = $definition['selectedOptions'];
-            }
-        }
         if (!empty($definition['description'])) {
             $properties['elementDescription'] = $definition['description'];
         }
@@ -213,13 +172,55 @@ class FormDefinitionFactory
             $properties['elementClassAttribute'] .= ' hidden';
         }
 
+        $defaultValue = $definition['defaultValue'];
+        if ('enumeration' === $definition['type']) {
+            $defaultValue = $definition['selectedOptions'];
+        }
+
         return [
-            'type'         => $type,
-            'identifier'   => $identifier,
-            'label'        => $label,
-            'validators'   => $validators,
-            'properties'   => $properties,
+            'type' => $this->typeMap[$definition['fieldType']],
+            'identifier' => $definition['name'],
+            'label' => $definition['label'],
+            'validators' => $this->renderFieldValidators($definition),
+            'properties' => $properties,
             'defaultValue' => $defaultValue,
         ];
+    }
+
+    /**
+     * @param array $definition
+     * @return array
+     */
+    protected function renderFieldValidators(array $definition): array
+    {
+        $validators = [];
+        if ($definition['required']) {
+            $validators[] = ['identifier' => 'Neos.Flow:NotEmpty'];
+        }
+        if (empty($definition['validation'])) {
+            return $validators;
+        }
+
+        $validation = $definition['validation'];
+        if (isset($validation['useDefaultBlockList']) && true === $validation['useDefaultBlockList']) {
+            $validators[] = ['identifier' => 'Onedrop.Form.Hubspot:FreeEmailAddressProvider'];
+        }
+
+        if (!empty($validation['data'])) {
+            if ('number' === $definition['fieldType']) {
+                list($minimum, $maximum) = explode(':', $validation['data']);
+                $validators[] = [
+                    'identifier' => 'Neos.Flow:NumberRange',
+                    'options' => ['minimum' => $minimum, 'maximum' => $maximum],
+                ];
+            } else {
+                $validators[] = [
+                    'identifier' => 'Onedrop.Form.Hubspot:EmailAddressBlacklist',
+                    'options' => ['blacklist' => $validation['data']],
+                ];
+            }
+        }
+
+        return $validators;
     }
 }

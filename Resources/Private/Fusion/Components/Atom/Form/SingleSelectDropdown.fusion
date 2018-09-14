@@ -51,7 +51,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown) < prototype(
         >
             <option value="" @if.hasPrependOptionLabel={props.properties.prependOptionLabel != null}>{props.properties.prependOptionLabel}</option>
             <Neos.Fusion:Collection collection={props.properties.options} itemName="optionLabel" itemKey="optionValue" @children="itemRenderer">
-                <option value={optionValue} selected={props.value == optionValue}>{optionLabel}</option>
+                <option value={optionValue} selected={Type.isArray(props.value) ? Array.indexOf(props.value, optionValue) > -1 : props.value == optionValue}>{optionLabel}</option>
             </Neos.Fusion:Collection>
         </select>
     `

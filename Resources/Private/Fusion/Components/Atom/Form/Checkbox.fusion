@@ -39,8 +39,8 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Checkbox) < prototype(Onedrop.Form
             class={props.class}
             name={props.name}
             required={props.isRequired}
-            value={props.value}
-            checked={Type.isArray(props.defaultValue) ? Array.length(props.defaultValue) == 1 : false}
+            value={props.properties.value}
+            checked={props.value}
         />
     `
 }
