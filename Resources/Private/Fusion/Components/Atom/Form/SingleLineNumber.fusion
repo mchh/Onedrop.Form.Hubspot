@@ -1,0 +1,56 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.SingleLineNumber) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+
+    @styleguide {
+        title = 'SingleLineNumber'
+        description = 'Single line number form input (input[type=number])'
+
+        props {
+            label = 'The label'
+            name = 'name'
+            value = 3
+            isRequired = false
+            properties {
+                min = 1
+                max = 10
+            }
+        }
+
+        propSets {
+            'With validation error' {
+                validationErrors = Neos.Fusion:RawArray {
+                    0 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                    }
+                }
+            }
+            'With two validation errors' {
+                validationErrors {
+                    0 = Neos.Fusion:RawArray {
+                        code = '1221560910'
+                    }
+                    1 = Neos.Fusion:RawArray {
+                        code = '1238108068'
+                        arguments = Neos.Fusion:RawArray {
+                            0 = 10
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    wrapperClass = 'input'
+
+    renderer = afx`
+        <input
+            type="number"
+            min={props.properties.min}
+            max={props.properties.max}
+            id={props.id}
+            name={props.name}
+            value={props.value}
+            required={props.isRequired}
+            autocomplete={props.properties.autocomplete ? props.properties.autocomplete : false}
+        />
+    `
+}

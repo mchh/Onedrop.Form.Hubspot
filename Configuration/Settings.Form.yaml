@@ -19,6 +19,9 @@ Neos:
           'Onedrop.Form.Hubspot:Component.Atom.SingleLineText':
             superTypes:
               'Neos.Form:SingleLineText': true
+          'Onedrop.Form.Hubspot:Component.Atom.SingleLineNumber':
+            superTypes:
+              'Onedrop.Form.Hubspot:Component.Atom.SingleLineText': true
           'Onedrop.Form.Hubspot:Component.Atom.MultiLineText':
             superTypes:
               'Neos.Form:MultiLineText': true

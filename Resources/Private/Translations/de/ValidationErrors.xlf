@@ -13,6 +13,12 @@
                 <source>Please provide a real email address.</source>
                 <target xml:lang="de">Bitte geben Sie eine richtige E-Mail Adresse an.</target>
             </trans-unit>
+
+            <!-- DateTime TypeConverter -->
+            <trans-unit id="1307719788" approved="yes">
+                <source>The date "{0}" was not recognized (for format "{1}").</source>
+                <target xml:lang="de">Das Datum "{0}" konnte nicht erkannt werde (für das Format "{1}").</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

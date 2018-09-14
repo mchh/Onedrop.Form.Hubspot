@@ -21,7 +21,7 @@ class FormDefinitionFactory
         'radio' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons',
         'checkbox' => 'Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes',
         'booleancheckbox' => 'Onedrop.Form.Hubspot:Component.Atom.Checkbox',
-        'number' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
+        'number' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineNumber',
         'file' => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
         'date' => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
     ];
@@ -171,10 +171,16 @@ class FormDefinitionFactory
         if ($definition['hidden']) {
             $properties['elementClassAttribute'] .= ' hidden';
         }
+        if ('number' === $definition['fieldType'] && !empty($definition['validation']['data'])) {
+            list($minimum, $maximum) = explode(':', $definition['validation']['data']);
+            $properties['min'] = $minimum;
+            $properties['max'] = $maximum;
+        }
 
-        $defaultValue = $definition['defaultValue'];
         if ('enumeration' === $definition['type']) {
             $defaultValue = $definition['selectedOptions'];
+        } else {
+            $defaultValue = $definition['defaultValue'];
         }
 
         return [
