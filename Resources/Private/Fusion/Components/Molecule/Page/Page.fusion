@@ -12,7 +12,6 @@ prototype(Onedrop.Form.Hubspot:Component.Molecule.Page) < prototype(Neos.Fusion:
                 <Neos.Fusion:Renderer
                     type={element.type}
                     element.containerElement={element}
-                    element.formRuntime={props.formRuntime}
                 />
             </Neos.Fusion:Collection>
         </fieldset>

@@ -1,7 +1,6 @@
 prototype(Onedrop.Form.Hubspot:Component.Atom.ElementRenderer) < prototype(Neos.Fusion:Component) {
 
     element = null
-    formRuntime = null
 
     renderer = Neos.Fusion:Renderer {
         type = ${props.element.type}
@@ -9,12 +8,12 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.ElementRenderer) < prototype(Neos.
             id = ${props.element.uniqueIdentifier}
             class =  ${props.element.properties.elementClassAttribute}
             errorClass =  ${props.element.properties.elementErrorClassAttribute}
-            name =  ${'--' + props.formRuntime.identifier + '[' + props.element.identifier + ']'}
+            name =  ${'--' + formRuntime.identifier + '[' + props.element.identifier + ']'}
             label = ${props.element.label}
-            value = ${Neos.Form.elementValue(props.formRuntime, props.element)}
+            value = ${Neos.Form.elementValue(formRuntime, props.element)}
             isRequired = ${props.element.required}
             properties = ${props.element.properties}
-            validationErrors = ${Neos.Form.validationErrors(props.formRuntime, props.element)}
+            validationErrors = ${Neos.Form.validationErrors(formRuntime, props.element)}
             childElements = ${props.element.elements}
             multiple = ${props.element.properties.multiple}
             defaultValue = ${props.element.defaultValue}
@@ -22,7 +21,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.ElementRenderer) < prototype(Neos.
     }
 
     renderer.@process.renderCallbacks = Neos.Form.FusionRenderer:RenderCallbacks {
-        formRuntime = ${props.formRuntime}
+        formRuntime = ${formRuntime}
         formElement = ${props.element}
     }
 }

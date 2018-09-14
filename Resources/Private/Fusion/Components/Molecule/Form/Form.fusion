@@ -16,7 +16,6 @@ prototype(Onedrop.Form.Hubspot:Component.Molecule.Form) < prototype(Neos.Fusion:
                     <Neos.Fusion:Renderer
                         type={formRuntime.currentPage.type}
                         element.containerElement={formRuntime.currentPage}
-                        element.formRuntime={formRuntime}
                     />
                 </div>
                 <Onedrop.Form.Hubspot:Component.Atom.Form.Navigation
