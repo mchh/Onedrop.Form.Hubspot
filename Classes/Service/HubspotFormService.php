@@ -51,7 +51,28 @@ class HubspotFormService
             return $this->cache->get(self::CACHE_KEY_ALL);
         }
 
-        $response = $this->forms->all();
+        try {
+            $response = $this->forms->all();
+        } catch (BadRequest $exception) {
+            if (401 === $exception->getCode()) {
+                return [
+                    [
+                        'identifier' => null,
+                        'label' => 'Your HAPI Key is invalid',
+                        'formGroups' => null,
+                    ],
+                ];
+            } else {
+                return [
+                    [
+                        'identifier' => null,
+                        'label' => 'Unknown error: ' . $exception->getMessage(),
+                        'formGroups' => null,
+                    ],
+                ];
+            }
+        }
+
         if (200 !== $response->getStatusCode()) {
             return [];
         }
@@ -89,7 +110,11 @@ class HubspotFormService
 //            return $this->cache->get($cacheIdentifier);
 //        }
 
-        $response = $this->forms->getById($formIdentifier);
+        try {
+            $response = $this->forms->getById($formIdentifier);
+        } catch (BadRequest $exception) {
+            return [];
+        }
         if (200 !== $response->getStatusCode()) {
             return [];
         }
