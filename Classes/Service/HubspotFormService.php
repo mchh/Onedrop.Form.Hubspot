@@ -106,9 +106,9 @@ class HubspotFormService
 
         $cacheIdentifier = implode('_', [self::CACHE_KEY_ONE, $formIdentifier]);
 
-//        if ($this->cache->has($cacheIdentifier)) {
-//            return $this->cache->get($cacheIdentifier);
-//        }
+        if ($this->cache->has($cacheIdentifier)) {
+            return $this->cache->get($cacheIdentifier);
+        }
 
         try {
             $response = $this->forms->getById($formIdentifier);
