@@ -3,7 +3,7 @@ prototype(Onedrop.Form.Hubspot:Component.Molecule.Form) < prototype(Neos.Fusion:
             <form
                 method="post"
                 id={formRuntime.identifier}
-                class="some-class"
+                class="{props.properties.elementClassAttribute}"
                 action={request.httpRequest.uri + '#' + formRuntime.identifier}
                 enctype="multipart/form-data"
                 >
