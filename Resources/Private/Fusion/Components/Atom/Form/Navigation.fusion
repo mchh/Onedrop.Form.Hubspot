@@ -62,6 +62,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Form.Navigation) < prototype(Neos.
                 {props.renderingOptions.nextButtonLabel ? props.renderingOptions.nextButtonLabel : 'Weiter'}
             </button>
             <button
+                @key="submit"
                 type="submit"
                 class="some-class some-class--submit"
                 name={buttonName}
