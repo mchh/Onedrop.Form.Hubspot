@@ -50,7 +50,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Form.Navigation) < prototype(Neos.
                 value={props.currentPageIndex - 1}
                 @if.hasPreviousPage={props.currentPageIndex > 0}
             >
-                {props.renderingOptions.previousButtonLabel ? props.renderingOptions.previousButtonLabel : 'Zurück'}
+                {formRuntime.renderingOptions.previousButtonLabel ? formRuntime.renderingOptions.previousButtonLabel : 'Zurück'}
             </button>
             <button
                 type="submit"
@@ -59,7 +59,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Form.Navigation) < prototype(Neos.
                 value={props.currentPageIndex + 1}
                 @if.hasNextPage={props.currentPageIndex < props.numberOfPages - 1}
             >
-                {props.renderingOptions.nextButtonLabel ? props.renderingOptions.nextButtonLabel : 'Weiter'}
+                {formRuntime.renderingOptions.nextButtonLabel ? formRuntime.renderingOptions.nextButtonLabel : 'Weiter'}
             </button>
             <button
                 @key="submit"
@@ -69,7 +69,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Form.Navigation) < prototype(Neos.
                 value={props.currentPageIndex + 1}
                 @if.hasNoNextPage={props.currentPageIndex == props.numberOfPages - 1}
             >
-                {props.renderingOptions.submitButtonLabel ? props.renderingOptions.submitButtonLabel : 'Submit'}
+                {formRuntime.renderingOptions.submitButtonLabel ? formRuntime.renderingOptions.submitButtonLabel : 'Submit'}
             </button>
         </div>
     `

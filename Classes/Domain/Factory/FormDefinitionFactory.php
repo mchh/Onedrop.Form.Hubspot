@@ -57,6 +57,9 @@ class FormDefinitionFactory
         $formDefinition = $this->getForm($hubspotForm['guid'], $hubspotForm['name'], [$page]);
         $formDefinition['renderingOptions']['_fusionRuntime'] = $runtime;
         $formDefinition['finishers'] = $this->finishers;
+        if (!empty($hubspotForm['submitText'])) {
+            $formDefinition['renderingOptions']['submitButtonLabel'] = $hubspotForm['submitText'];
+        }
 
         return $formDefinition;
     }
