@@ -1,6 +1,16 @@
 <?php
 namespace Onedrop\Form\Hubspot;
 
+/*
+ * This file is part of the Onedrop.Form.Hubspot package.
+ *
+ * (c) 2018 Oliver Eglseder <oeglseder@1drop.de>, Onedrop GmbH & Co. KG
+ *
+ * This package is Open Source Software. For the full copyright and license
+ * information, please view the LICENSE file which was distributed with this
+ * source code.
+ */
+
 use Neos\Flow\Exception as FlowException;
 
 class Exception extends FlowException
