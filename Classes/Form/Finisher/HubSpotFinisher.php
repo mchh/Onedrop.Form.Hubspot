@@ -15,6 +15,7 @@ namespace Onedrop\Form\Hubspot\Form\Finisher;
 use Neos\Flow\Annotations as Flow;
 use Neos\Form\Core\Model\AbstractFinisher;
 use Neos\Form\Core\Model\AbstractFormElement;
+use Neos\Form\Core\Runtime\FormRuntime;
 use Onedrop\Form\Hubspot\Service\HubspotFormService;
 
 class HubSpotFinisher extends AbstractFinisher
@@ -31,11 +32,27 @@ class HubSpotFinisher extends AbstractFinisher
     protected function executeInternal()
     {
         $formRuntime = $this->finisherContext->getFormRuntime();
-        $formDefinition = $formRuntime->getFormDefinition();
-        $httpRequest = $formRuntime->getRequest()->getHttpRequest();
 
+        $hubspotFormData = $this->populateHubspotFormData($formRuntime);
+        $hubspotFormData['hs_context'] = json_encode($this->buildHubspotContext($formRuntime));
+
+        $hubspotFormId = $formRuntime->getFormDefinition()->getIdentifier();
+        $formSubmitResponse = $this->hubspotFormService->submit($hubspotFormId, $hubspotFormData);
+
+        if (!empty($formSubmitResponse['inlineMessage'])) {
+            $formRuntime->getResponse()->setContent($formSubmitResponse['inlineMessage']);
+            $this->finisherContext->cancel();
+        }
+    }
+
+    /**
+     * @param FormRuntime $formRuntime
+     * @return array
+     */
+    protected function populateHubspotFormData(FormRuntime $formRuntime): array
+    {
         $formData = [];
-        foreach ($formDefinition->getPages() as $page) {
+        foreach ($formRuntime->getFormDefinition()->getPages() as $page) {
             foreach ($page->getElementsRecursively() as $element) {
                 if ($element instanceof AbstractFormElement) {
                     $identifier = $element->getIdentifier();
@@ -44,23 +61,25 @@ class HubSpotFinisher extends AbstractFinisher
             }
         }
 
+        return $formData;
+    }
+
+    /**
+     * @param FormRuntime $formRuntime
+     * @return array
+     */
+    protected function buildHubspotContext(FormRuntime $formRuntime): array
+    {
+        $httpRequest = $formRuntime->getRequest()->getHttpRequest();
         $hubspotContext = [
             'ipAddress' => $httpRequest->getClientIpAddress(),
-            'pageUrl'   => $httpRequest->getUri(),
-            'pageName'  => $formRuntime->getFormState()->getFormValue('page') ?? '',
+            'pageUrl' => $httpRequest->getUri(),
+            'pageName' => $formRuntime->getFormState()->getFormValue('page') ?? '',
         ];
         if ($httpRequest->hasCookie('hubspotutk')) {
             $hubspotContext['hutk'] = $httpRequest->getCookie('hubspotutk');
         }
-        $formData['hs_context'] = json_encode($hubspotContext);
 
-        $form = $this->hubspotFormService->submit($formDefinition->getIdentifier(), $formData);
-
-        $response = $formRuntime->getResponse();
-
-        if (!empty($form['inlineMessage'])) {
-            $response->setContent($form['inlineMessage']);
-            $this->finisherContext->cancel();
-        }
+        return $hubspotContext;
     }
 }
