@@ -3,8 +3,6 @@ declare(strict_types=1);
 namespace Onedrop\Form\Hubspot\Controller;
 
 use Neos\ContentRepository\Domain\Model\Node;
-use Neos\ContentRepository\Domain\Service\NodeService;
-use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
 use Neos\Neos\View\FusionView;
 
@@ -22,12 +20,6 @@ class AjaxFormController extends ActionController
      * @var FusionView
      */
     protected $view = null;
-
-    /**
-     * @Flow\Inject()
-     * @var NodeService
-     */
-    protected $nodeService = null;
 
     /**
      * @param Node $node
