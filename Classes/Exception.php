@@ -1,7 +1,9 @@
 <?php
 namespace Onedrop\Form\Hubspot;
 
-class Exception extends \Neos\Flow\Exception
+use Neos\Flow\Exception as FlowException;
+
+class Exception extends FlowException
 {
     const NO_FOM_SELECTED_CODE = 1536740278;
     const NO_FOM_SELECTED_MESSAGE = 'No form selected';
