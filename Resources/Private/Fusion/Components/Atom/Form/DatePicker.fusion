@@ -39,7 +39,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.DatePicker) < prototype(Onedrop.Fo
             class={props.class}
             name={props.name}
             required={props.isRequired}
-            value={props.value}
+            value={Type.instance(props.value, '\DateTime') ? Date.format(props.value, 'Y-m-d') : props.value}
         />
     `
 }
