@@ -16,7 +16,7 @@ class HubSpotFinisher extends AbstractFinisher
     protected $hubspotFormService;
 
     /**
-     *
+     * @throws \Neos\Cache\Exception
      */
     protected function executeInternal()
     {
