@@ -52,7 +52,7 @@ class HubSpotFinisher extends AbstractFinisher
         if ($httpRequest->hasCookie('hubspotutk')) {
             $hubspotContext['hutk'] = $httpRequest->getCookie('hubspotutk');
         }
-        $formData['hs_context'] = urlencode(json_encode($hubspotContext));
+        $formData['hs_context'] = json_encode($hubspotContext);
 
         $form = $this->hubspotFormService->submit($formDefinition->getIdentifier(), $formData);
 
