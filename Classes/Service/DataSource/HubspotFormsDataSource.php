@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Onedrop\Form\Hubspot\Service\DataSource;
 
 use Neos\ContentRepository\Domain\Model\NodeInterface;

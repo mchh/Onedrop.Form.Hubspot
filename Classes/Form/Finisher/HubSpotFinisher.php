@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Onedrop\Form\Hubspot\Form\Finisher;
 
 use Neos\Flow\Annotations as Flow;
