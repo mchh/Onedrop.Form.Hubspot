@@ -7,9 +7,6 @@ use Neos\Form\Core\Model\AbstractFinisher;
 use Neos\Form\Core\Model\AbstractFormElement;
 use Onedrop\Form\Hubspot\Service\HubspotFormService;
 
-/**
- * Class HubSpotFinisher
- */
 class HubSpotFinisher extends AbstractFinisher
 {
     /**

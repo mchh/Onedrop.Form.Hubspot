@@ -1,9 +1,6 @@
 <?php
 namespace Onedrop\Form\Hubspot;
 
-/**
- * Class Exception
- */
 class Exception extends \Neos\Flow\Exception
 {
     const NO_FOM_SELECTED_CODE = 1536740278;

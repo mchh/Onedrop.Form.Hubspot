@@ -5,9 +5,6 @@ namespace Onedrop\Form\Hubspot\FusionObjects;
 use Neos\Fusion\Core\ExceptionHandlers\AbstractRenderingExceptionHandler;
 use Onedrop\Form\Hubspot\Exception;
 
-/**
- * Class ExceptionHandler
- */
 class ExceptionHandler extends AbstractRenderingExceptionHandler
 {
     /**

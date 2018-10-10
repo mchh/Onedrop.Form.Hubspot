@@ -6,9 +6,6 @@ use Neos\Flow\Annotations as Flow;
 use Neos\Fusion\Core\Runtime;
 use Onedrop\Form\Hubspot\Service\HubspotFormService;
 
-/**
- * Class FormDefinitionFactory
- */
 class FormDefinitionFactory
 {
     /**
