@@ -7,6 +7,7 @@ prototype(Onedrop.Form.Hubspot:FormRuntimeFactory) {
             class = 'onedrophubspot_noform'
         }
         content = 'Please select a hubspot form in the element inspector'
+        @process.contentElementWrapping = Neos.Neos:ContentElementWrapping
     }
 }
 
