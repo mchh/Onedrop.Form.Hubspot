@@ -61,6 +61,43 @@ class FormDefinitionFactory
 
         $sections = $this->getSections($hubspotForm['formFieldGroups']);
         $page = $this->getPage('page-one', $sections);
+
+        if (!empty($hubspotForm['metaData'])) {
+            foreach ($hubspotForm['metaData'] as $metaData) {
+                if ('legalConsentOptions' === $metaData['name']) {
+                    $value = json_decode($metaData['value'], true);
+
+                    $fields = [];
+                    if (isset($value['communicationConsentCheckboxes'])) {
+                        foreach ($value['communicationConsentCheckboxes'] as $constentCheckBox) {
+                            $fields[] = [
+                                'name' => "consent-checkbox-{$constentCheckBox['communicationTypeId']}",
+                                'label' => $constentCheckBox['label'],
+                                'type' => 'enumeration',
+                                'fieldType' => 'booleancheckbox',
+                                'description' => '',
+                                'required' => true,
+                                'selectedOptions' => [],
+                                'options' => [
+                                    [
+                                        'value' => $constentCheckBox['communicationTypeId'],
+                                        'label' => $constentCheckBox['label'],
+                                    ],
+                                ],
+                                'enabled' => 1,
+                                'hidden' => false,
+                            ];
+                        }
+                    }
+                    $page['renderables'] = array_merge(
+                        $page['renderables'],
+                        $this->getSections([['fields' => $fields]])
+                    );
+                }
+            }
+            $formDefinition['renderingOptions']['submitButtonLabel'] = $hubspotForm['submitText'];
+        }
+
         $formDefinition = $this->getForm($hubspotForm['guid'], $hubspotForm['name'], [$page]);
         $formDefinition['renderingOptions']['_fusionRuntime'] = $runtime;
         $formDefinition['finishers'] = $this->finishers;
