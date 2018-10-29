@@ -22,6 +22,7 @@ class FormDefinitionFactory
      * @var array
      */
     protected $typeMap = [
+        'email' => 'Onedrop.Form.Hubspot:Component.Atom.Email',
         'text' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
         'textarea' => 'Onedrop.Form.Hubspot:Component.Atom.MultiLineText',
         'select' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown',
@@ -197,6 +198,11 @@ class FormDefinitionFactory
             return [];
         }
 
+        $type = $this->typeMap[$definition ['fieldType']];
+        if ('email' === $definition['name']) {
+            $type = $this->typeMap['email'];
+        }
+
         $properties = [];
         if (!empty($definition['placeholder'])) {
             $properties['placeholder'] = $definition['placeholder'];
@@ -231,7 +237,7 @@ class FormDefinitionFactory
         }
 
         return [
-            'type' => $this->typeMap[$definition['fieldType']],
+            'type' => $type,
             'identifier' => $definition['name'],
             'label' => $definition['label'],
             'validators' => $this->renderFieldValidators($definition),
