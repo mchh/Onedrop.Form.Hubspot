@@ -1,6 +1,7 @@
 prototype(Onedrop.Form.Hubspot:Component.Atom.Email) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
 
     wrapperClass = 'input'
+    isRequired = true
 
     renderer = afx`
         <input

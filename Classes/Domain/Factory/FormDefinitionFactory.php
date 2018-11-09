@@ -32,6 +32,7 @@ class FormDefinitionFactory
         'number' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineNumber',
         'file' => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
         'date' => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
+        'rte' => 'Onedrop.Form.Hubspot:Component.Atom.Rte',
     ];
 
     /**
@@ -66,9 +67,24 @@ class FormDefinitionFactory
         if (!empty($hubspotForm['metaData'])) {
             foreach ($hubspotForm['metaData'] as $metaData) {
                 if ('legalConsentOptions' === $metaData['name']) {
+                    $fields = [];
                     $value = json_decode($metaData['value'], true);
 
-                    $fields = [];
+                    if (!empty($value['communicationConsentText'])) {
+                        $fields[] = [
+                            'name' => 'consent-communication-consent-text',
+                            'label' => $value['communicationConsentText'],
+                            'type' => 'rte',
+                            'fieldType' => 'rte',
+                            'description' => '',
+                            'required' => true,
+                            'selectedOptions' => [],
+                            'enabled' => 1,
+                            'hidden' => false,
+                            'defaultValue' => '',
+                        ];
+                    }
+
                     if (isset($value['communicationConsentCheckboxes'])) {
                         foreach ($value['communicationConsentCheckboxes'] as $constentCheckBox) {
                             $fields[] = [
@@ -77,7 +93,7 @@ class FormDefinitionFactory
                                 'type' => 'enumeration',
                                 'fieldType' => 'booleancheckbox',
                                 'description' => '',
-                                'required' => true,
+                                'required' => $constentCheckBox['required'],
                                 'selectedOptions' => [],
                                 'options' => [
                                     [
@@ -90,10 +106,83 @@ class FormDefinitionFactory
                             ];
                         }
                     }
-                    $page['renderables'] = array_merge(
-                        $page['renderables'],
-                        $this->getSections([['fields' => $fields]])
-                    );
+
+                    if (!empty($value['processingConsentText'])) {
+                        $fields[] = [
+                            'name' => 'consent-processing-consent-text',
+                            'label' => $value['processingConsentText'],
+                            'type' => 'rte',
+                            'fieldType' => 'rte',
+                            'description' => '',
+                            'required' => true,
+                            'selectedOptions' => [],
+                            'enabled' => 1,
+                            'hidden' => false,
+                            'defaultValue' => '',
+                        ];
+                    }
+
+                    $consentRequired = true;
+                    if (isset($value['processingConsentType'])) {
+                        $consentRequired = ('REQUIRED_CHECKBOX' === $value['processingConsentType']);
+                    }
+
+                    if (!empty($value['processingConsentCheckboxLabel'])) {
+                        $fields[] = [
+                            'name' => "consent-checkbox-checkbox-label}",
+                            'label' => $value['processingConsentCheckboxLabel'],
+                            'type' => 'enumeration',
+                            'fieldType' => 'booleancheckbox',
+                            'description' => '',
+                            'required' => $consentRequired,
+                            'selectedOptions' => [],
+                            'options' => [
+                                [
+                                    'value' => 1,
+                                    'label' => $value['processingConsentCheckboxLabel'],
+                                ],
+                            ],
+                            'enabled' => 1,
+                            'hidden' => false,
+                        ];
+                    }
+
+                    if (!empty($value['processingConsentFooterText'])) {
+                        $fields[] = [
+                            'name' => 'consent-processing-consent-footer-text',
+                            'label' => $value['processingConsentFooterText'],
+                            'type' => 'rte',
+                            'fieldType' => 'rte',
+                            'description' => '',
+                            'required' => true,
+                            'selectedOptions' => [],
+                            'enabled' => 1,
+                            'hidden' => false,
+                            'defaultValue' => '',
+                        ];
+                    }
+
+                    if (!empty($value['privacyPolicyText'])) {
+                        $fields[] = [
+                            'name' => 'consent-privacy-policy-text',
+                            'label' => $value['privacyPolicyText'],
+                            'type' => 'rte',
+                            'fieldType' => 'rte',
+                            'description' => '',
+                            'required' => true,
+                            'selectedOptions' => [],
+                            'enabled' => 1,
+                            'hidden' => false,
+                            'defaultValue' => '',
+                        ];
+                    }
+
+                    foreach ($fields as $field) {
+                        $page['renderables'] = array_merge(
+                            $page['renderables'],
+                            $this->getSections([['fields' => [$field]]])
+                        );
+                    }
                 }
             }
             $formDefinition['renderingOptions']['submitButtonLabel'] = $hubspotForm['submitText'];
@@ -198,12 +287,14 @@ class FormDefinitionFactory
             return [];
         }
 
+        $properties = [];
+
         $type = $this->typeMap[$definition ['fieldType']];
         if ('email' === $definition['name']) {
             $type = $this->typeMap['email'];
+            $definition['required'] = true;
         }
 
-        $properties = [];
         if (!empty($definition['placeholder'])) {
             $properties['placeholder'] = $definition['placeholder'];
         }
@@ -238,7 +329,7 @@ class FormDefinitionFactory
 
         return [
             'type' => $type,
-            'identifier' => $definition['name'],
+            'identifier' => !empty($definition['name']) ? $definition['name'] : md5(json_encode($definition)),
             'label' => $definition['label'],
             'validators' => $this->renderFieldValidators($definition),
             'properties' => $properties,
