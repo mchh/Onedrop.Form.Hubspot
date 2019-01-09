@@ -24,6 +24,7 @@ class FormDefinitionFactory
     protected $typeMap = [
         'email' => 'Onedrop.Form.Hubspot:Component.Atom.Email',
         'text' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineText',
+        'hidden' => 'Onedrop.Form.Hubspot:Component.Atom.Hidden',
         'textarea' => 'Onedrop.Form.Hubspot:Component.Atom.MultiLineText',
         'select' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown',
         'radio' => 'Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons',
@@ -313,7 +314,7 @@ class FormDefinitionFactory
             $properties['elementDescription'] = $definition['description'];
         }
         if ($definition['hidden']) {
-            $properties['elementClassAttribute'] .= ' hidden';
+            $type = $this->typeMap['hidden'];
         }
         if ('number' === $definition['fieldType'] && !empty($definition['validation']['data'])) {
             list($minimum, $maximum) = explode(':', $definition['validation']['data']);

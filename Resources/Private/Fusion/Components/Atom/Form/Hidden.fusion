@@ -1,0 +1,5 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.Hidden)  < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <input type="hidden" id={props.id} name={props.name} value={props.value} />
+    `
+}
