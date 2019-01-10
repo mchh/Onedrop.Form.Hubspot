@@ -13,6 +13,7 @@ namespace Onedrop\Form\Hubspot\Controller;
  */
 
 use Neos\ContentRepository\Domain\Model\Node;
+use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
 use Neos\Neos\View\FusionView;
 
@@ -33,6 +34,7 @@ class AjaxFormController extends ActionController
 
     /**
      * @param Node $node
+     * @Flow\SkipCsrfProtection()
      */
     public function submitAction(Node $node)
     {
