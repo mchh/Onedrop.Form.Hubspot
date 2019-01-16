@@ -74,7 +74,7 @@ class FormDefinitionFactory
                     if (!empty($value['communicationConsentText'])) {
                         $fields[] = [
                             'name' => 'consent-communication-consent-text',
-                            'label' => $value['communicationConsentText'],
+                            'label' => htmlspecialchars($value['communicationConsentText']),
                             'type' => 'rte',
                             'fieldType' => 'rte',
                             'description' => '',
@@ -90,7 +90,7 @@ class FormDefinitionFactory
                         foreach ($value['communicationConsentCheckboxes'] as $constentCheckBox) {
                             $fields[] = [
                                 'name' => "consent-checkbox-{$constentCheckBox['communicationTypeId']}",
-                                'label' => $constentCheckBox['label'],
+                                'label' => htmlspecialchars($constentCheckBox['label']),
                                 'type' => 'enumeration',
                                 'fieldType' => 'booleancheckbox',
                                 'description' => '',
@@ -99,7 +99,7 @@ class FormDefinitionFactory
                                 'options' => [
                                     [
                                         'value' => $constentCheckBox['communicationTypeId'],
-                                        'label' => $constentCheckBox['label'],
+                                        'label' => htmlspecialchars($constentCheckBox['label']),
                                     ],
                                 ],
                                 'enabled' => 1,
@@ -111,7 +111,7 @@ class FormDefinitionFactory
                     if (!empty($value['processingConsentText'])) {
                         $fields[] = [
                             'name' => 'consent-processing-consent-text',
-                            'label' => $value['processingConsentText'],
+                            'label' => htmlspecialchars($value['processingConsentText']),
                             'type' => 'rte',
                             'fieldType' => 'rte',
                             'description' => '',
@@ -131,7 +131,7 @@ class FormDefinitionFactory
                     if (!empty($value['processingConsentCheckboxLabel'])) {
                         $fields[] = [
                             'name' => "consent-checkbox-checkbox-label}",
-                            'label' => $value['processingConsentCheckboxLabel'],
+                            'label' => htmlspecialchars($value['processingConsentCheckboxLabel']),
                             'type' => 'enumeration',
                             'fieldType' => 'booleancheckbox',
                             'description' => '',
@@ -151,7 +151,7 @@ class FormDefinitionFactory
                     if (!empty($value['processingConsentFooterText'])) {
                         $fields[] = [
                             'name' => 'consent-processing-consent-footer-text',
-                            'label' => $value['processingConsentFooterText'],
+                            'label' => htmlspecialchars($value['processingConsentFooterText']),
                             'type' => 'rte',
                             'fieldType' => 'rte',
                             'description' => '',
@@ -166,7 +166,7 @@ class FormDefinitionFactory
                     if (!empty($value['privacyPolicyText'])) {
                         $fields[] = [
                             'name' => 'consent-privacy-policy-text',
-                            'label' => $value['privacyPolicyText'],
+                            'label' => htmlspecialchars($value['privacyPolicyText']),
                             'type' => 'rte',
                             'fieldType' => 'rte',
                             'description' => '',
@@ -193,7 +193,7 @@ class FormDefinitionFactory
         $formDefinition['renderingOptions']['_fusionRuntime'] = $runtime;
         $formDefinition['finishers'] = $this->finishers;
         if (!empty($hubspotForm['submitText'])) {
-            $formDefinition['renderingOptions']['submitButtonLabel'] = $hubspotForm['submitText'];
+            $formDefinition['renderingOptions']['submitButtonLabel'] = htmlspecialchars($hubspotForm['submitText']);
         }
 
         return $formDefinition;
@@ -210,7 +210,7 @@ class FormDefinitionFactory
         return [
             'type' => 'Onedrop.Form.Hubspot:Component.Molecule.Form',
             'identifier' => $identifier,
-            'label' => $label,
+            'label' => htmlspecialchars($label),
             'renderables' => $children,
         ];
     }
@@ -301,7 +301,7 @@ class FormDefinitionFactory
         }
         if (!empty($definition['options'])) {
             foreach ($definition['options'] as $option) {
-                $properties['options'][$option['value']] = $option['label'];
+                $properties['options'][$option['value']] = htmlspecialchars($option['label']);
             }
         }
 
@@ -331,7 +331,7 @@ class FormDefinitionFactory
         return [
             'type' => $type,
             'identifier' => !empty($definition['name']) ? $definition['name'] : md5(json_encode($definition)),
-            'label' => $definition['label'],
+            'label' => htmlspecialchars($definition['label']),
             'validators' => $this->renderFieldValidators($definition),
             'properties' => $properties,
             'defaultValue' => $defaultValue,
