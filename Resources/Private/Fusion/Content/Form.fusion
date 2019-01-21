@@ -9,6 +9,15 @@ prototype(Onedrop.Form.Hubspot:FormRuntimeFactory) {
         content = 'Please select a hubspot form in the element inspector'
         @process.contentElementWrapping = Neos.Neos:ContentElementWrapping
     }
+
+    formUnavailable = Neos.Fusion:Tag {
+        tagName = 'div'
+        attributes {
+            class = 'onedrophubspot_noform'
+        }
+        content = 'The forms are temporarily not available'
+        @process.contentElementWrapping = Neos.Neos:ContentElementWrapping
+    }
 }
 
 prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {

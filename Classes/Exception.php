@@ -17,6 +17,8 @@ class Exception extends FlowException
 {
     const NO_FOM_SELECTED_CODE = 1536740278;
     const NO_FOM_SELECTED_MESSAGE = 'No form selected';
+    const FORM_UNAVAILABLE_CODE = 1548082903;
+    const FORM_UNAVAILABLE_MESSAGE = 'Form unavailable';
 
     /**
      * @return Exception
@@ -24,5 +26,10 @@ class Exception extends FlowException
     public static function noFormSelected(): Exception
     {
         return new self(self::NO_FOM_SELECTED_MESSAGE, self::NO_FOM_SELECTED_CODE);
+    }
+
+    public static function formUnavailable(): Exception
+    {
+        return new self(self::FORM_UNAVAILABLE_MESSAGE, self::FORM_UNAVAILABLE_CODE);
     }
 }

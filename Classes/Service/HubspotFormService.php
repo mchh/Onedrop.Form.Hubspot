@@ -14,6 +14,7 @@ namespace Onedrop\Form\Hubspot\Service;
 
 use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;
+use Psr\Log\LoggerInterface;
 use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Factory;
 use SevenShores\Hubspot\Resources\Forms;
@@ -43,6 +44,12 @@ class HubspotFormService
      * @var array
      */
     protected $settings = [];
+
+    /**
+     * @Flow\Inject
+     * @var \Neos\Flow\Log\SystemLoggerInterface
+     */
+    protected $systemLogger;
 
     /**
      * HubspotFormService constructor.
@@ -124,9 +131,11 @@ class HubspotFormService
         try {
             $response = $this->forms->getById($formIdentifier);
         } catch (BadRequest $exception) {
+            $this->systemLogger->logException($exception);
             return [];
         }
         if (200 !== $response->getStatusCode()) {
+            $this->systemLogger->log('Hubspot API returned non 200 code', LOG_ERR, ['responseCode' => $response->getStatusCode()]);
             return [];
         }
 

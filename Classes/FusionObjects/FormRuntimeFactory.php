@@ -67,7 +67,7 @@ class FormRuntimeFactory extends AbstractFusionObject
             $this->runtime
         );
         if (empty($formDefinition)) {
-            throw new Exception('Please select a form');
+            throw Exception::formUnavailable();
         }
 
         $request = $this->getRuntime()->getControllerContext()->getRequest();

@@ -30,6 +30,7 @@ class ExceptionHandler extends AbstractRenderingExceptionHandler
         if (Exception::NO_FOM_SELECTED_CODE === $exception->getCode()) {
             return $this->runtime->render($fusionPath . '/noForm');
         }
+
         return (string)$exception;
     }
 }
