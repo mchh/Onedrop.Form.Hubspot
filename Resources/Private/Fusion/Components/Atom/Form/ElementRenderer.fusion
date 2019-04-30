@@ -10,10 +10,10 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.ElementRenderer) < prototype(Neos.
             errorClass =  ${props.element.properties.elementErrorClassAttribute}
             name =  ${'--' + formRuntime.identifier + '[' + props.element.identifier + ']'}
             label = ${props.element.label}
-            value = ${Neos.Form.elementValue(formRuntime, props.element)}
+            value = ${Neos.Form.FusionRenderer.elementValue(formRuntime, props.element)}
             isRequired = ${props.element.required}
             properties = ${props.element.properties}
-            validationErrors = ${Neos.Form.validationErrors(formRuntime, props.element)}
+            validationErrors = ${Neos.Form.FusionRenderer.validationErrors(formRuntime, props.element)}
             childElements = ${props.element.elements}
             multiple = ${props.element.properties.multiple}
             defaultValue = ${props.element.defaultValue}
