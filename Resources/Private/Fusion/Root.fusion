@@ -6,4 +6,15 @@ prototype(Neos.Neos:Page) {
     body.javascripts.ajaxForms = Neos.Fusion:Tag {
         @if.hasFormAndIsLiveAndActive = ${q(node).find('[instanceof Onedrop.Form.Hubspot:Content.Form]').is() && node.context.live && Configuration.setting('Onedrop.AjaxForm.includeJavascript')}
     }
+
+    body.javascripts.cpatchaForms = Neos.Fusion:Tag {
+            @position = '6100'
+            tagName = 'script'
+            attributes {
+                src = Neos.Fusion:ResourceUri {
+                    path = 'resource://Onedrop.Form.Hubspot/Public/JavaScript/captcha.js'
+                }
+            }
+            @if.hasFormAndIsLiveAndActive = ${q(node).children('[instanceof Neos.Neos:ContentCollection]').find('[instanceof Onedrop.AjaxForm:Form]').is() && node.context.live && Configuration.setting('Onedrop.AjaxForm.includeJavascript')}
+        }
 }

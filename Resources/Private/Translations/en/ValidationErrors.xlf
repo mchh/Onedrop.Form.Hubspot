@@ -2,6 +2,11 @@
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
     <file original="" product-name="Neos.Flow" source-language="en" datatype="plaintext" target-language="de">
         <body>
+            <!-- RecaptchaV2Validator -->
+            <trans-unit id="1536243701" approved="yes">
+                <source>Captcha could not be validated.</source>
+            </trans-unit>
+
             <!-- EmailAddressBlacklistValidator -->
             <trans-unit id="1536243708" approved="yes">
                 <source>This email address is blacklisted.</source>

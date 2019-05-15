@@ -50,6 +50,10 @@ Neos:
             superTypes:
               'Neos.Form:DatePicker': true
 
+          'Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2':
+            superTypes:
+              'Neos.Fusion:Component': true
+
         finisherPresets:
           'Onedrop.Form.Hubspot:HubSpotFinisher':
             implementationClassName: Onedrop\Form\Hubspot\Form\Finisher\HubSpotFinisher
@@ -59,3 +63,5 @@ Neos:
             implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\FreeEmailAddressProviderValidator
           'Onedrop.Form.Hubspot:EmailAddressBlacklist':
             implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\EmailAddressBlacklistValidator
+          'Onedrop.Form.Hubspot:RecaptchaV2':
+            implementationClassName: Onedrop\Form\Hubspot\Validation\Validator\RecaptchaV2Validator

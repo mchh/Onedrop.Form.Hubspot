@@ -4,6 +4,11 @@ Onedrop:
       api:
         hapikey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
         portalId: xxxxxxx
+      recaptcha_v2:
+        sitekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        secretkey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        enableRecaptcha: false
+
       finishers:
         - identifier: Onedrop.Form.Hubspot:HubSpotFinisher
           options: []
