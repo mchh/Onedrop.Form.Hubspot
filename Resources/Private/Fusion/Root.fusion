@@ -7,7 +7,7 @@ prototype(Neos.Neos:Page) {
         @if.hasFormAndIsLiveAndActive = ${q(node).find('[instanceof Onedrop.Form.Hubspot:Content.Form]').is() && node.context.live && Configuration.setting('Onedrop.AjaxForm.includeJavascript')}
     }
 
-    body.javascripts.cpatchaForms = Neos.Fusion:Tag {
+    body.javascripts.captchaForms = Neos.Fusion:Tag {
             @position = '6100'
             tagName = 'script'
             attributes {
