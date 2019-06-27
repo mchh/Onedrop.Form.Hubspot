@@ -1,20 +1,27 @@
 prototype(Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
-    templatePath = 'resource://Onedrop.Form.Hubspot/Private/Templates/RecaptchaV2.html'
-    props2 = ${props}
     props = ${props.element}
-    this = ${this}
     sitekey = ${Configuration.setting('Onedrop.Form.Hubspot.recaptcha_v2.sitekey')}
+    invisible = ${Configuration.setting('Onedrop.Form.Hubspot.recaptcha_v2.invisible')}
+    fieldHash = ${String.md5(props.id)}
+
+    renderer.@context {
+        badge = Neos.Fusion:Tag {
+            tagName = 'div'
+
+            attributes {
+                class = 'g-recaptcha'
+                id = ${'g-recaptcha-' + props.fieldHash}
+                data-form-elementid = ${props.id}
+                data-callback= 'recaptchaCallback'
+                data-sitekey = ${props.sitekey}
+                data-size = 'invisible'
+                data-size.@if.isInvisible = ${props.invisible}
+            }
+        }
+    }
 
     renderer = afx`
-            <input type="hidden" id={props.id} name={props.name} value={props.value} />
-            <Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2Badge hiddenFieldId={props.id} />
-        `
-}
-
-prototype(Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2Badge) < prototype(Neos.Fusion:Template) {
-    templatePath = 'resource://Onedrop.Form.Hubspot/Private/Templates/RecaptchaV2.html'
-    hiddenFieldId = ${props.id}
-    fieldHash = ${String.md5(props.id)}
-    props = ${props.element}
-    sitekey = ${Configuration.setting('Onedrop.Form.Hubspot.recaptcha_v2.sitekey')}
+        <input type="hidden" id={props.id} name={props.name} />
+        {badge}
+    `
 }

@@ -8,6 +8,7 @@ Onedrop:
         sitekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         secretkey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         enableRecaptcha: false
+        invisible: false
 
       finishers:
         - identifier: Onedrop.Form.Hubspot:HubSpotFinisher
