@@ -1,5 +1,4 @@
 !function(d,w,m){
-
     w.hasReCaptchaAPI||(w.hasReCaptchaAPI=true,m=d.createElement('script'),m.async=1,m.defer=1,m.src='https://www.google.com/recaptcha/api.js',d.body.appendChild(m));
     var g=d.querySelectorAll(".g-recaptcha")[0],a=g.closest("form");
     a.addEventListener("submit",function(t){
@@ -13,14 +12,23 @@
 }(document,window);
 
 function recaptchaCallback(token) {
-    var g=document.querySelectorAll(".g-recaptcha")[0];
-    document.getElementById(g.getAttribute('data-form-elementid')).value=token;
+    let captchas = document.querySelectorAll(".g-recaptcha");
+    for(let i=0; i<captchas.length; i++) {
+        let inputId = captchas[i].getAttribute('data-form-elementid');
+        document.getElementById(inputId).value=token;
+    }
 }
 
 function rebuildCaptcha() {
-    grecaptcha.render(document.querySelectorAll(".g-recaptcha")[0]);
+    let captchas = document.querySelectorAll(".g-recaptcha");
+    for(let i=0; i<captchas.length; i++) {
+        try {
+            grecaptcha.render(captchas[i]);
+        } catch (e) {
+            // do nothing
+        }
+    }
 }
-
 
 window.recaptchaCallback = recaptchaCallback;
 

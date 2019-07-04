@@ -2,7 +2,6 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2) < prototype(Onedrop.F
     props = ${props.element}
     sitekey = ${Configuration.setting('Onedrop.Form.Hubspot.recaptcha_v2.sitekey')}
     invisible = ${Configuration.setting('Onedrop.Form.Hubspot.recaptcha_v2.invisible')}
-    fieldHash = ${String.md5(props.id)}
 
     renderer.@context {
         badge = Neos.Fusion:Tag {
@@ -10,7 +9,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2) < prototype(Onedrop.F
 
             attributes {
                 class = 'g-recaptcha'
-                id = ${'g-recaptcha-' + props.fieldHash}
+                id = ${'g-recaptcha-' + String.md5(props.id)}
                 data-form-elementid = ${props.id}
                 data-callback= 'recaptchaCallback'
                 data-sitekey = ${props.sitekey}
