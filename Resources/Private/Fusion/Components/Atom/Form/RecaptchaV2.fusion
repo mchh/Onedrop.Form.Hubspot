@@ -11,10 +11,9 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2) < prototype(Onedrop.F
                 class = 'g-recaptcha'
                 id = ${'g-recaptcha-' + String.md5(props.id)}
                 data-form-elementid = ${props.id}
-                data-callback= 'recaptchaCallback'
+                data-callback= ${props.invisible ? 'invisibleCallback' : 'recaptchaCallback'}
                 data-sitekey = ${props.sitekey}
-                data-size = 'invisible'
-                data-size.@if.isInvisible = ${props.invisible}
+                data-size = ${props.invisible ? 'invisible' : ''}
             }
         }
     }
