@@ -1,4 +1,27 @@
 prototype(Onedrop.Form.Hubspot:Component.Atom.Hidden)  < prototype(Neos.Fusion:Component) {
+
+    @styleguide {
+            title = 'SingleLineText'
+            description = 'Single line text Form Element (textfield)'
+
+            props {
+                label = 'The label'
+                name = 'name'
+                value = ''
+                isRequired = false
+            }
+
+            propSets {
+                'With validation error' {
+                    validationErrors = Neos.Fusion:RawArray {
+                        0 = Neos.Fusion:RawArray {
+                            code = '1536243701'
+                        }
+                    }
+                }
+            }
+        }
+
     renderer = afx`
         <input type="hidden" id={props.id} name={props.name} value={props.value} />
     `

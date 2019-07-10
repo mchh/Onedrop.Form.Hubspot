@@ -34,7 +34,14 @@ class FormDefinitionFactory
         'file' => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
         'date' => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
         'rte' => 'Onedrop.Form.Hubspot:Component.Atom.Rte',
+        'recaptchaV2' => 'Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2'
     ];
+
+    /**
+     * @Flow\InjectConfiguration()
+     * @var array
+     */
+    protected $settings = [];
 
     /**
      * @var HubspotFormService
@@ -60,6 +67,11 @@ class FormDefinitionFactory
 
         if (empty($hubspotForm)) {
             return [];
+        }
+
+        $useCaptcha = false;
+        if(isset($this->settings['recaptcha_v2'], $this->settings['recaptcha_v2']['secretkey'], $this->settings['recaptcha_v2']['enableRecaptcha']) && $this->settings['recaptcha_v2']['enableRecaptcha']===true) {
+            $useCaptcha = true;
         }
 
         $sections = $this->getSections($hubspotForm['formFieldGroups']);
@@ -187,6 +199,31 @@ class FormDefinitionFactory
                 }
             }
             $formDefinition['renderingOptions']['submitButtonLabel'] = $hubspotForm['submitText'];
+        }
+
+        if($useCaptcha) {
+            $fields = [];
+            $fields[] = [
+                'name' => 'recaptcha',
+                'label' => '',
+                'type' => 'captcha',
+                'fieldType' => 'recaptchaV2',
+                'validation' => [
+                    'data' => [
+                        'secretkey' => $this->settings['recaptcha_v2']['secretkey']
+                    ]
+                ],
+                'description' => '',
+                'required' => true,
+                'selectedOptions' => [],
+                'enabled' => 1,
+                'hidden' => false,
+                'defaultValue' => '',
+            ];
+            $page['renderables'] = array_merge(
+                $page['renderables'],
+                $this->getSections([['fields' => [$fields[0]]]])
+            );
         }
 
         $formDefinition = $this->getForm($hubspotForm['guid'], $hubspotForm['name'], [$page]);
@@ -363,6 +400,11 @@ class FormDefinitionFactory
                 $validators[] = [
                     'identifier' => 'Neos.Flow:NumberRange',
                     'options' => ['minimum' => $minimum, 'maximum' => $maximum],
+                ];
+            } elseif ('recaptchaV2' === $definition['fieldType']) {
+                $validators[] = [
+                    'identifier' => 'Onedrop.Form.Hubspot:RecaptchaV2',
+                    'options' => $validation['data'],
                 ];
             } else {
                 $validators[] = [

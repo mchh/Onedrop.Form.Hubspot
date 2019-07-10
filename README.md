@@ -20,7 +20,7 @@ We use semantic-versioning so every breaking change will increase the major-vers
 
 ## Configuration
 
-Set your own Hubsport portal id and api key.
+Set your own Hubsport portal id and api key. To enable ReCaptcha validation add your sitekey and secretkey. You can enable/disable the recaptcha validation with the enableRecaptcha setting.
 
 ```
 Onedrop:
@@ -29,6 +29,10 @@ Onedrop:
       api:
         hapikey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
         portalId: xxxxxxx
+      recaptcha_v2:
+        sitekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        secretkey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        enableRecaptcha: true
 ```
 
 ## License
