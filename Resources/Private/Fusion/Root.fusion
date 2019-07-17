@@ -15,6 +15,6 @@ prototype(Neos.Neos:Page) {
                     path = 'resource://Onedrop.Form.Hubspot/Public/JavaScript/captcha.js'
                 }
             }
-            @if.hasFormAndIsLiveAndActive = ${q(node).children('[instanceof Neos.Neos:ContentCollection]').find('[instanceof Onedrop.Form.Hubspot:Content.Form]').is() && node.context.live && Configuration.setting('Onedrop.Form.Hubspot.recaptcha_v2.enableRecaptcha')}
+            @if.hasFormAndIsLiveAndActive = ${q(node).find('[instanceof Onedrop.Form.Hubspot:Content.Form]').is() && node.context.live && Configuration.setting('Onedrop.Form.Hubspot.recaptcha_v2.enableRecaptcha')}
         }
 }
