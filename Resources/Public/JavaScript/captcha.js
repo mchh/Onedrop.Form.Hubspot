@@ -65,13 +65,14 @@ function rebuildCaptcha() {
 let activeButton = null;
 
 function submitForm() {
-    let formId = activeButton.name.match('((\\w|\\d)+-)+(\\w|\\d)+')[0];
-    let form = document.querySelector('form#' + formId);
-    let hiddenField = document.createElement('input');
-    hiddenField.name = activeButton.name;
-    hiddenField.setAttribute('value', activeButton.value);
-    hiddenField.hidden = true;
-    form.appendChild(hiddenField);
+    let form = activeButton.closest('form');
+    if (activeButton.name && activeButton.value) {
+        let hiddenField = document.createElement('input');
+        hiddenField.name = activeButton.name;
+        hiddenField.setAttribute('value', activeButton.value);
+        hiddenField.hidden = true;
+        form.appendChild(hiddenField);
+    }
     form.submit();
 }
 
@@ -79,13 +80,17 @@ function submitForm() {
  * add token to inputs and submit form
  *
  * @param token
+ * @returns {Promise|Promise|u}
  */
 function invisibleCallback(token) {
-    if(activeButton) {
-        setValuesForRecaptchas(token);
-        submitForm();
-        activeButton = null;
-    }
+    return new Promise(function(resolve) {
+        if (activeButton) {
+            setValuesForRecaptchas(token);
+            submitForm();
+            activeButton = null;
+            resolve();
+        }
+    });
 }
 
 /**

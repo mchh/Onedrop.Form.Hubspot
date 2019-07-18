@@ -5,7 +5,7 @@
             <!-- RecaptchaV2Validator -->
             <trans-unit id="1536243701" approved="yes">
                 <source>Captcha could not be validated.</source>
-                <target xml:lang="de">Captcha konnte nicht validiert werden..</target>
+                <target xml:lang="de">Captcha konnte nicht validiert werden.</target>
             </trans-unit>
 
             <!-- EmailAddressBlacklistValidator -->
