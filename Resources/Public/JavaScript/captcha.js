@@ -65,8 +65,7 @@ function rebuildCaptcha() {
 let activeButton = null;
 
 function submitForm() {
-    let formId = activeButton.name.match('((\\w|\\d)+-)+(\\w|\\d)+')[0];
-    let form = document.getElementById(formId);
+    let form = activeButton.closest('form');
     if (activeButton.name && activeButton.value) {
         let hiddenField = document.createElement('input');
         hiddenField.name = activeButton.name;
