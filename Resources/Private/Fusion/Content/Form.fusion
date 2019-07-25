@@ -29,17 +29,31 @@ prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentCompon
             action = 'submit'
             format = 'html'
         }
+        id = ${q(node).property('formIdentifier')}
     }
 
     content = Onedrop.Form.Hubspot:FormRuntimeFactory {
         identifier = ${q(node).property('formIdentifier')}
     }
 
-    renderer = afx`
-        <div data-ajax={props.formWrapperAttributes.data-ajax} data-ajax-uri={props.formWrapperAttributes.data-ajax-uri}>
-            {props.content}
-        </div>
-    `
+    renderer = Neos.Fusion:Tag {
+        tagName = 'div'
+
+        attributes {
+            data-ajax = ${props.formWrapperAttributes.data-ajax}
+            data-ajax.@if.hasForm = ${_hasForm}
+            data-ajax-uri = ${props.formWrapperAttributes.data-ajax-uri}
+            data-ajax-uri.@if.hasForm = ${_hasForm}
+            id = ${props.formWrapperAttributes.id}
+            id.@if.hasNoForm = ${!_hasForm}
+        }
+
+        content = ${props.content}
+
+        @context {
+            _hasForm = ${String.indexOf(props.content, '<form') >= 0}
+        }
+    }
 
     @cache {
         mode = 'uncached'
