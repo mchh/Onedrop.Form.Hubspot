@@ -39,10 +39,8 @@ class HubSpotFinisher extends AbstractFinisher
         $hubspotFormId = $formRuntime->getFormDefinition()->getIdentifier();
         $formSubmitResponse = $this->hubspotFormService->submit($hubspotFormId, $hubspotFormData);
 
-        if (!empty($formSubmitResponse['inlineMessage'])) {
-            $formRuntime->getResponse()->setContent($formSubmitResponse['inlineMessage']);
-            $this->finisherContext->cancel();
-        }
+        $formRuntime->getResponse()->setContent($formSubmitResponse);
+        $this->finisherContext->cancel();
     }
 
     /**
