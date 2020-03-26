@@ -135,7 +135,7 @@ class HubspotFormService
             return [];
         }
         if (200 !== $response->getStatusCode()) {
-            $this->systemLogger->log('Hubspot API returned non 200 code', LOG_ERR, ['responseCode' => $response->getStatusCode()]);
+            $this->logError('Hubspot API returned non 200 code', $response->getStatusCode());
             return [];
         }
 
@@ -153,23 +153,26 @@ class HubspotFormService
      * @param  string $formIdentifier
      * @param  array $formData
      * @throws \Neos\Cache\Exception
-     * @return mixed
+     * @return string
      */
     public function submit(string $formIdentifier, array $formData)
     {
         try {
             $apiResponse = $this->forms->submit($this->settings['api']['portalId'], $formIdentifier, $formData);
-            switch ($apiResponse->getStatusCode()) {
+            switch ($code = $apiResponse->getStatusCode()) {
                 case 204:
-                    return $this->getFormByIdentifier($formIdentifier);
-                case 302:
-                case 500:
+                    return $this->getFormByIdentifier($formIdentifier)['inlineMessage'];
                 default:
+                    $this->logError('Hubspot API returned unexpected code on form submission', $code);
+                    return 'Something went wrong with the form submission.';
             }
         } catch (BadRequest $exception) {
-            if (400 === $exception->getCode()) {
-                // Validation failed.
-            }
+            $this->logError($exception->getMessage(), $exception->getCode());
+            return $exception->getMessage();
         }
+    }
+
+    private function logError($message, $code) {
+        $this->systemLogger->log($message, LOG_ERR, ['responseCode' => $code]);
     }
 }
