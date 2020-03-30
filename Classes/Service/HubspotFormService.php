@@ -160,6 +160,8 @@ class HubspotFormService
         try {
             $apiResponse = $this->forms->submit($this->settings['api']['portalId'], $formIdentifier, $formData);
             switch ($code = $apiResponse->getStatusCode()) {
+                case 200:
+                    return '';
                 case 204:
                     return $this->getFormByIdentifier($formIdentifier)['inlineMessage'];
                 default:
