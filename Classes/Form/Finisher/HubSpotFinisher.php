@@ -35,7 +35,6 @@ class HubSpotFinisher extends AbstractFinisher
 
         $hubspotFormData = $this->populateHubspotFormData($formRuntime);
         $hubspotFormData['hs_context'] = json_encode($this->buildHubspotContext($formRuntime));
-
         $hubspotFormId = $formRuntime->getFormDefinition()->getIdentifier();
         $formSubmitResponse = $this->hubspotFormService->submit($hubspotFormId, $hubspotFormData);
 
@@ -71,9 +70,10 @@ class HubSpotFinisher extends AbstractFinisher
         $httpRequest = $formRuntime->getRequest()->getHttpRequest();
         $hubspotContext = [
             'ipAddress' => $httpRequest->getClientIpAddress(),
-            'pageUrl' => $httpRequest->getUri(),
+            'pageUrl' => $httpRequest->getServerParams()['HTTP_REFERER'] ?? '',
             'pageName' => $formRuntime->getFormState()->getFormValue('page') ?? '',
         ];
+
         if ($httpRequest->hasCookie('hubspotutk')) {
             $hubspotContext['hutk'] = $httpRequest->getCookie('hubspotutk');
         }
