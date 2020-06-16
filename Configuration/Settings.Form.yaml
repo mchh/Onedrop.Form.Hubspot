@@ -49,6 +49,9 @@ Neos:
           'Onedrop.Form.Hubspot:Component.Atom.DatePicker':
             superTypes:
               'Neos.Form:DatePicker': true
+          'Onedrop.Form.Hubspot:Component.Atom.Hidden':
+            superTypes:
+              'Neos.Form:FormElement': true
 
           'Onedrop.Form.Hubspot:Component.Atom.RecaptchaV2':
             superTypes:
