@@ -68,7 +68,7 @@ class HubspotFormService
      */
     public function initializeObject()
     {
-        $this->forms = Factory::create($this->settings['api']['hapikey'])->forms();
+        $this->forms = Factory::createWithOAuth2Token($this->settings['api']['access-token'])->forms();
     }
 
     /**
