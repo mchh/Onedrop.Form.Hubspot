@@ -2,7 +2,7 @@ Onedrop:
   Form:
     Hubspot:
       api:
-        hapikey: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+        access-token: xxx-xxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
         portalId: xxxxxxx
       recaptcha_v2:
         sitekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
