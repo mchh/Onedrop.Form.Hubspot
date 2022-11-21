@@ -15,6 +15,7 @@ namespace Onedrop\Form\Hubspot\Service;
 use Neos\Cache\Frontend\VariableFrontend;
 use Neos\Flow\Annotations as Flow;
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use SevenShores\Hubspot\Exceptions\BadRequest;
 use SevenShores\Hubspot\Factory;
 use SevenShores\Hubspot\Resources\Forms;
@@ -46,10 +47,21 @@ class HubspotFormService
     protected $settings = [];
 
     /**
-     * @Flow\Inject
-     * @var \Neos\Flow\Log\SystemLoggerInterface
+     * @Flow\Inject(name="Neos.Flow:SystemLogger")
+     * @var LoggerInterface
      */
     protected $systemLogger;
+
+    /**
+     * Injects the (system) logger based on PSR-3.
+     *
+     * @param LoggerInterface $logger
+     * @return void
+     */
+    public function injectLogger(LoggerInterface $systemLogger)
+    {
+        $this->systemLogger = $systemLogger;
+    }
 
     /**
      * HubspotFormService constructor.
@@ -131,7 +143,7 @@ class HubspotFormService
         try {
             $response = $this->forms->getById($formIdentifier);
         } catch (BadRequest $exception) {
-            $this->systemLogger->logException($exception);
+            $this->systemLogger->log(LogLevel::ERROR,$exception,);
             return [];
         }
         if (200 !== $response->getStatusCode()) {
@@ -175,6 +187,6 @@ class HubspotFormService
     }
 
     private function logError($message, $code) {
-        $this->systemLogger->log($message, LOG_ERR, ['responseCode' => $code]);
+        $this->systemLogger->log(LogLevel::ERROR, $message, ['responseCode' => $code]);
     }
 }
