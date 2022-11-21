@@ -10,6 +10,7 @@
         }
     ],
     "require": {
+        "neos/neos": "~7.0 | ~8.0",
         "neos/form": "^5.0",
         "neos/form-fusionrenderer": "^2.1",
         "hubspot/hubspot-php": "^5.0",
