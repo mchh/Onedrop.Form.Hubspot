@@ -69,13 +69,13 @@ class HubSpotFinisher extends AbstractFinisher
     {
         $httpRequest = $formRuntime->getRequest()->getHttpRequest();
         $hubspotContext = [
-            'ipAddress' => $httpRequest->getClientIpAddress(),
-            'pageUrl' => $httpRequest->getServerParams()['HTTP_REFERER'] ?? '',
+            'ipAddress' => $httpRequest->getServerParams()['REMOTE_ADDR'] ?? '',
+            'pageUri' => $httpRequest->getServerParams()['HTTP_REFERER'] ?? '',
             'pageName' => $formRuntime->getFormState()->getFormValue('page') ?? '',
         ];
 
-        if ($httpRequest->hasCookie('hubspotutk')) {
-            $hubspotContext['hutk'] = $httpRequest->getCookie('hubspotutk');
+        if (isset($httpRequest->getCookieParams()['hubspotutk'])) {
+            $hubspotContext['hutk'] = $httpRequest->getCookieParams()['hubspotutk'];
         }
 
         return $hubspotContext;
