@@ -10,11 +10,10 @@
         }
     ],
     "require": {
-        "neos/neos": "^4.0",
-        "neos/form": "^4.0",
-        "neos/form-fusionrenderer": "^1.0.2",
-        "ryanwinchester/hubspot-php": "^1.1",
-        "onedrop/ajaxform": "^3.1.2",
+        "neos/form": "^5.0",
+        "neos/form-fusionrenderer": "^2.1",
+        "hubspot/hubspot-php": "^5.0",
+        "onedrop/ajaxform": "^4.0",
         "google/recaptcha": "^1.2"
     },
     "autoload": {
