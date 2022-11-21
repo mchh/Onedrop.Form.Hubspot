@@ -33,8 +33,8 @@ class HubSpotFinisher extends AbstractFinisher
     {
         $formRuntime = $this->finisherContext->getFormRuntime();
 
-        $hubspotFormData = $this->populateHubspotFormData($formRuntime);
-        $hubspotFormData['hs_context'] = json_encode($this->buildHubspotContext($formRuntime));
+        $hubspotFormData['fields'] = ($this->populateHubspotFormData($formRuntime));
+        $hubspotFormData['context'] = $this->buildHubspotContext($formRuntime);
         $hubspotFormId = $formRuntime->getFormDefinition()->getIdentifier();
         $formSubmitResponse = $this->hubspotFormService->submit($hubspotFormId, $hubspotFormData);
 
@@ -53,7 +53,7 @@ class HubSpotFinisher extends AbstractFinisher
             foreach ($page->getElementsRecursively() as $element) {
                 if ($element instanceof AbstractFormElement) {
                     $identifier = $element->getIdentifier();
-                    $formData[$identifier] = $formRuntime->getFormState()->getFormValue($identifier);
+                    array_push($formData, ['name' => $identifier, 'value' => $formRuntime->getFormState()->getFormValue($identifier)]);
                 }
             }
         }
