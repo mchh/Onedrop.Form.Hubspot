@@ -368,7 +368,7 @@ class FormDefinitionFactory
         return [
             'type' => $type,
             'identifier' => !empty($definition['name']) ? $definition['name'] : md5(json_encode($definition)),
-            'label' => htmlspecialchars($definition['label']),
+            'label' => htmlspecialchars_decode($definition['label']),
             'validators' => $this->renderFieldValidators($definition),
             'properties' => $properties,
             'defaultValue' => $defaultValue,
