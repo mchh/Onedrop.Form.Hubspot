@@ -35,6 +35,13 @@ class HubSpotFinisher extends AbstractFinisher
 
         $hubspotFormData['fields'] = ($this->populateHubspotFormData($formRuntime));
         $hubspotFormData['context'] = $this->buildHubspotContext($formRuntime);
+        $hubspotFormData['legalConsentOptions'] = [
+            'consent' => [
+                'consentToProcess' => true,
+                'text' => "I consent to processing my data from the contact form above as described below and especially in the Privacy Policy.
+                You may unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy Policy."
+            ],
+        ];
         $hubspotFormId = $formRuntime->getFormDefinition()->getIdentifier();
         $formSubmitResponse = $this->hubspotFormService->submit($hubspotFormId, $hubspotFormData);
 
