@@ -4,8 +4,8 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes) < protot
         label = "MultipleSelectCheckboxes"
 
         props {
-            properties = Neos.Fusion:RawArray {
-                options = Neos.Fusion:RawArray {
+            properties = Neos.Fusion:DataStructure {
+                options = Neos.Fusion:DataStructure {
                     0 = Onedrop.Form.Hubspot:Component.Atom.Checkbox {
                         label = 'some-string'
                         id = 'some-string'
@@ -21,7 +21,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes) < protot
 
     renderer = afx`
         <ul class="inputs-list">
-            <Neos.Fusion:Collection collection={props.properties.options} @children="itemRenderer" itemName="option" iterationName="itemIterator">
+            <Neos.Fusion:Loop items={props.properties.options} @children="itemRenderer" itemName="option" iterationName="itemIterator">
                 <li>
                     <input
                         type="checkbox"
@@ -33,7 +33,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes) < protot
                         checked={Type.isArray(props.value) ? Array.indexOf(props.value, option) > -1 : props.value == option}
                     />
                 </li>
-            </Neos.Fusion:Collection>
+            </Neos.Fusion:Loop>
         </ul>
     `
 }

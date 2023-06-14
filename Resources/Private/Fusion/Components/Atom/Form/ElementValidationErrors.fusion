@@ -1,13 +1,13 @@
 prototype(Onedrop.Form.Hubspot:Component.Atom.ElementValidationErrors) < prototype(Neos.Fusion:Component) {
 
-    validationErrors = Neos.Fusion:RawArray
+    validationErrors = Neos.Fusion:DataStructure
 
     renderer = afx`
-        <Neos.Fusion:Collection collection={props.validationErrors} itemName="error" @children="itemRenderer">
+        <Neos.Fusion:Loop items={props.validationErrors} itemName="error" @children="itemRenderer">
             <span class={props.errorClass}>
                 {Translation.translate(error.code, null, Type.isArray(error.arguments) ? error.arguments : [], 'ValidationErrors', 'Neos.Flow')}
             </span>
-        </Neos.Fusion:Collection>
+        </Neos.Fusion:Loop>
     `
 
     @if.hasValidationErrors = ${!Array.isEmpty(props.validationErrors)}

@@ -37,7 +37,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.Form.Navigation) < prototype(Neos.
     formIdentifier = ''
     currentPageIndex = 0
     numberOfPages = 1
-    renderingOptions = Neos.Fusion:RawArray
+    renderingOptions = Neos.Fusion:DataStructure
     # /API
 
     renderer.@context.buttonName = ${'--' +  props.formIdentifier + '[__currentPage]'}

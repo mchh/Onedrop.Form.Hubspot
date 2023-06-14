@@ -21,7 +21,7 @@ prototype(Onedrop.Form.Hubspot:FormRuntimeFactory) {
 }
 
 prototype(Onedrop.Form.Hubspot:Content.Form) < prototype(Neos.Neos:ContentComponent) {
-    formWrapperAttributes = Neos.Fusion:RawArray {
+    formWrapperAttributes = Neos.Fusion:DataStructure {
         data-ajax = 'ajax-form'
         data-ajax-uri = Neos.Fusion:UriBuilder {
             package = 'Onedrop.Form.Hubspot'

@@ -19,10 +19,10 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.MultiLineText) < prototype(Onedrop
             }
             'With two validation errors' {
                 validationErrors {
-                    0 = Neos.Fusion:RawArray {
+                    0 = Neos.Fusion:DataStructure {
                         code = '1221560910'
                     }
-                    1 = Neos.Fusion:RawArray {
+                    1 = Neos.Fusion:DataStructure {
                         code = '1221560910'
                     }
                 }

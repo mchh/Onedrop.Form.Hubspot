@@ -10,7 +10,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons) < protot
             isRequired = false
             properties {
                 prependOptionLabel = '- select -'
-                options = Neos.Fusion:RawArray {
+                options = Neos.Fusion:DataStructure {
                     value1 = 'Label 01'
                     value2 = 'Label 02'
                     value3 = 'Label 03'
@@ -20,18 +20,18 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons) < protot
 
         propSets {
             'With validation error' {
-                validationErrors = Neos.Fusion:RawArray {
-                    0 = Neos.Fusion:RawArray {
+                validationErrors = Neos.Fusion:DataStructure {
+                    0 = Neos.Fusion:DataStructure {
                         code = '1221560910'
                     }
                 }
             }
             'With two validation errors' {
                 validationErrors {
-                    0 = Neos.Fusion:RawArray {
+                    0 = Neos.Fusion:DataStructure {
                         code = '1221560910'
                     }
-                    1 = Neos.Fusion:RawArray {
+                    1 = Neos.Fusion:DataStructure {
                         code = '1221560910'
                     }
                 }
@@ -43,7 +43,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons) < protot
 
     renderer = afx`
         <ul>
-            <Neos.Fusion:Collection collection={props.properties.options} itemName="optionLabel" itemKey="optionValue" @children="itemRenderer">
+            <Neos.Fusion:Loop items={props.properties.options} itemName="optionLabel" itemKey="optionValue" @children="itemRenderer">
                 <li>
                     <label @if.hasLabel={optionLabel} for={"ident-" + optionValue}>
                         {optionLabel}
@@ -58,7 +58,7 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleSelectRadiobuttons) < protot
                         checked={Type.isArray(props.value) ? Array.indexOf(props.value, optionValue) > -1 : props.value == optionValue}
                     />
                 </li>
-            </Neos.Fusion:Collection>
+            </Neos.Fusion:Loop>
         </ul>
     `
 }

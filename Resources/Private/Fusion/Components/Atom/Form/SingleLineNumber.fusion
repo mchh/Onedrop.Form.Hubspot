@@ -17,20 +17,20 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.SingleLineNumber) < prototype(Oned
 
         propSets {
             'With validation error' {
-                validationErrors = Neos.Fusion:RawArray {
-                    0 = Neos.Fusion:RawArray {
+                validationErrors = Neos.Fusion:DataStructure {
+                    0 = Neos.Fusion:DataStructure {
                         code = '1221560910'
                     }
                 }
             }
             'With two validation errors' {
                 validationErrors {
-                    0 = Neos.Fusion:RawArray {
+                    0 = Neos.Fusion:DataStructure {
                         code = '1221560910'
                     }
-                    1 = Neos.Fusion:RawArray {
+                    1 = Neos.Fusion:DataStructure {
                         code = '1238108068'
-                        arguments = Neos.Fusion:RawArray {
+                        arguments = Neos.Fusion:DataStructure {
                             0 = 10
                         }
                     }
