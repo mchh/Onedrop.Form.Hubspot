@@ -7,8 +7,8 @@ prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) < prototype(Ne
     label = ''
     value = null
     isRequired = false
-    properties = Neos.Fusion:RawArray
-    validationErrors = Neos.Fusion:RawArray
+    properties = Neos.Fusion:DataStructure
+    validationErrors = Neos.Fusion:DataStructure
     wrapperClass = 'component'
 
 
