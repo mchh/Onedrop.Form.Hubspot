@@ -1,0 +1,16 @@
+prototype(Onedrop.Form.Hubspot:Component.Atom.PhoneNumber) < prototype(Onedrop.Form.Hubspot:Component.Atom.DefaultFormElement) {
+
+    wrapperClass = 'input'
+    isRequired = false
+
+    renderer = afx`
+        <input
+            type="tel"
+            id={props.id}
+            name={props.name}
+            value={props.value}
+            required={props.isRequired}
+            autocomplete={props.properties.autocomplete ? props.properties.autocomplete : false}
+        />
+    `
+}
