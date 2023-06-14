@@ -31,6 +31,9 @@ Neos:
           'Onedrop.Form.Hubspot:Component.Atom.MultiLineText':
             superTypes:
               'Neos.Form:MultiLineText': true
+          'Onedrop.Form.Hubspot:Component.Atom.PhoneNumber':
+            superTypes:
+              'Neos.Form:SingleLineText': true
           'Onedrop.Form.Hubspot:Component.Atom.SingleSelectDropdown':
             superTypes:
               'Neos.Form:SingleSelectDropdown': true
