@@ -31,6 +31,7 @@ class FormDefinitionFactory
         'checkbox' => 'Onedrop.Form.Hubspot:Component.Atom.MultipleSelectCheckboxes',
         'booleancheckbox' => 'Onedrop.Form.Hubspot:Component.Atom.Checkbox',
         'number' => 'Onedrop.Form.Hubspot:Component.Atom.SingleLineNumber',
+        'phonenumber' => 'Onedrop.Form.Hubspot:Component.Atom.PhoneNumber',
         'file' => 'Onedrop.Form.Hubspot:Component.Atom.FileUpload',
         'date' => 'Onedrop.Form.Hubspot:Component.Atom.DatePicker',
         'rte' => 'Onedrop.Form.Hubspot:Component.Atom.Rte',
